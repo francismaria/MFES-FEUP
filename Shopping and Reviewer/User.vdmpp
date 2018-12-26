@@ -23,12 +23,15 @@ operations
 			username := usernameExt;
 			password := passwordExt;
 			registerDate := dateExt;
+			ID := numberOfUsers;
+			numberOfUsers := numberOfUsers + 1;
 		);
 		
-	public GetUserID : () ==> nat1
+	-- ACCESSOR METHODS
+		
+	public GetUserID: () ==> nat1
 	GetUserID() == 
 		return ID;
-	
 	
 	public GetUsername: () ==> String
 	GetUsername() == 
@@ -38,8 +41,22 @@ operations
 	GetRegisterDate() ==
 		return registerDate;
 		
+	-- MODIFIER METHODS
+	
+	public SetNewUsername: String ==> ()
+	SetNewUsername(newUsername) ==
+	(
+		username := newUsername;
+	);
+		
+	public SetNewPassword: String ==> ()
+	SetNewPassword(newPassword) ==
+	(
+		password := newPassword;
+	);
+		
+		
 functions
--- TODO Define functiones here
 traces
--- TODO Define Combinatorial Test Traces here
+
 end User
