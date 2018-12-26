@@ -1,0 +1,45 @@
+class User
+types
+	public String = seq of char;
+	public Date :: year : nat
+								 month : nat
+								 day : nat;			 
+values
+-- TODO Define values here
+instance variables
+
+	private ID : nat1;
+	private username : String;
+	private password : String;
+	private registerDate : Date;
+	
+	static numberOfUsers : nat1 := 1; 
+	inv ID < numberOfUsers;
+	
+operations
+	public User : String * String * Date ==> User
+	User(usernameExt, passwordExt, dateExt) == 
+		(
+			username := usernameExt;
+			password := passwordExt;
+			registerDate := dateExt;
+		);
+		
+	public GetUserID : () ==> nat1
+	GetUserID() == 
+		return ID;
+	
+	
+	public GetUsername: () ==> String
+	GetUsername() == 
+		return username;
+		
+	public GetRegisterDate: () ==> Date
+	GetRegisterDate() ==
+		return registerDate;
+		
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end User
