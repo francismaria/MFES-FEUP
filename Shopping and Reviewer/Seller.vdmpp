@@ -1,0 +1,28 @@
+
+class Seller is subclass of User
+
+types
+
+values
+
+
+instance variables
+-- conjunto de produtos que está a vender
+-- conjunto de avaliações 
+
+
+operations
+
+	-- CONSTRUCTOR
+	
+	public Seller : String * String * nat1 * nat1 * nat1 ==> Seller
+	Seller(usernameExt, passwordExt, dayExt, monthExt, yearExt) == 
+	(
+		User`User(usernameExt, passwordExt, dayExt, monthExt, yearExt);
+	);
+	
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Seller
