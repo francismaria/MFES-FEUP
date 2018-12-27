@@ -8,7 +8,7 @@ values
 instance variables
 -- conjunto de produtos que está a vender
 -- conjunto de avaliações 
-private availableProducts : seq of String := [];
+private availableProducts : set of String := {};
 
 operations
 
@@ -19,6 +19,26 @@ operations
 	(
 		User`User(usernameExt, passwordExt, dayExt, monthExt, yearExt);
 	);
+	
+	
+	-- ACCESSOR METHODS 
+	
+	public getAllProducts: () ==> set of String
+	getAllProducts() == 
+	(
+		return availableProducts;
+	);
+	
+	
+	-- MODIFIER METHODS
+	
+	public addNewProduct: String ==> ()
+	addNewProduct(newProduct) ==
+	(
+		availableProducts := availableProducts union {newProduct};
+	)
+	pre newProduct <> "";
+	
 	
 functions
 -- TODO Define functiones here

@@ -50,6 +50,7 @@ operations
 	getRegisterDate() ==
 		return registerDate;
 		
+		
 	-- MODIFIER METHODS
 	
 	public setNewUsername: String ==> ()
@@ -58,6 +59,7 @@ operations
 		username := newUsername;
 	)
 	pre newUsername <> "";
+	
 		
 	public setNewPassword: String ==> ()
 	setNewPassword(newPassword) ==
