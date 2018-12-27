@@ -30,7 +30,7 @@ operations
 		numberOfProducts := numberOfProducts + 1;
 		ID := numberOfProducts;
 	)
-	pre newName <> "" and newDescription <> "";
+	pre newName <> "" and newDescription <> "" and newPrice >= 0;
 	
 	
 	-- ACCESSOR METHODS
@@ -61,8 +61,17 @@ operations
 	
 	-- MODIFIER METHODS
 	
+	public changePrice: Float ==> ()
+	changePrice(newPrice) ==
+	(
+		price := newPrice;
+	)
+	pre price <> newPrice;
+	
+	
 functions
--- TODO Define functiones here
+-- descontos
+
 traces
 -- TODO Define Combinatorial Test Traces here
 end Product
