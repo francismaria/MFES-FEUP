@@ -1,6 +1,7 @@
 class Seller is subclass of User
 
 types
+  public Products = set of String;
 
 values
 
@@ -8,7 +9,7 @@ values
 instance variables
 -- conjunto de produtos que está a vender
 -- conjunto de avaliações 
-private availableProducts : set of String := {};
+	public availableProducts : Products := {};
 
 operations
 
@@ -23,7 +24,7 @@ operations
 	
 	-- ACCESSOR METHODS 
 	
-	public getAllProducts: () ==> set of String
+	public getAllProducts: () ==> Products
 	getAllProducts() == 
 	(
 		return availableProducts;

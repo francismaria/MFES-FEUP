@@ -1,0 +1,68 @@
+class Product
+
+types
+	public String = seq of char;
+	public Float = real;
+	
+values
+
+instance variables
+
+	private ID : nat1;
+	private name : String;
+	private description : String;
+	private price : Float;
+	
+	private static numberOfProducts : int := 0;
+	
+	inv ID <= numberOfProducts and ID > 0;
+	
+operations
+
+	-- CONSTRUCTOR
+	
+	public Product: String * String * Float ==> Product
+	Product(newName, newDescription, newPrice) ==
+	(
+		name := newName;
+		description := newDescription;
+		price := newPrice;
+		numberOfProducts := numberOfProducts + 1;
+		ID := numberOfProducts;
+	)
+	pre newName <> "" and newDescription <> "";
+	
+	
+	-- ACCESSOR METHODS
+	
+	public getID: () ==> nat1
+	getID() ==
+	(
+		return ID;
+	);
+	
+	public getName: () ==> String
+	getName() ==
+	(
+		return name;
+	);
+	
+	public getDescription: () ==> String
+	getDescription() == 
+	(
+		return description;
+	);
+	
+	public getPrice: () ==> Float
+	getPrice() ==
+	(
+		return price;
+	);
+	
+	-- MODIFIER METHODS
+	
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Product
