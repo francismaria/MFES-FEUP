@@ -1,10 +1,13 @@
 class User
 types
 	public String = seq of char;
+	
 	public Date :: year : nat1
 								 month : nat1
-								 day : nat1;		
-					 
+								 day : nat1		
+	inv d == d.month <= 12 and d.year >= 0
+			and d.day < 31;
+			
 values
 
 instance variables
@@ -19,6 +22,8 @@ instance variables
 	
 operations
 
+	-- CONSTRUCTOR
+
 	public User : String * String * nat1 * nat1 * nat1 ==> User
 	User(usernameExt, passwordExt, dayExt, monthExt, yearExt) == 
 		(
@@ -29,6 +34,8 @@ operations
 			numberOfUsers := numberOfUsers + 1;
 		)
 		pre usernameExt <> "" and passwordExt <> "";
+		
+		
 	-- ACCESSOR METHODS
 		
 	public getUserID: () ==> nat1
@@ -59,6 +66,7 @@ operations
 		
 		
 functions
+	--verificar se palavra-passe é segura
 traces
 
 end User
