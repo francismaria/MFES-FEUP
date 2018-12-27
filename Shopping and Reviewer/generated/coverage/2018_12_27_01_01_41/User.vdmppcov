@@ -14,8 +14,8 @@ instance variables
 	private password : String;
 	private registerDate : Date;
 	
-	static numberOfUsers : nat1 := 1; 
-	inv ID <= numberOfUsers;
+	static numberOfUsers : nat1 := 0; 
+	inv ID < numberOfUsers;
 	
 operations
 
@@ -27,8 +27,8 @@ operations
 			registerDate := mk_Date(dayExt, monthExt, yearExt);
 			ID := numberOfUsers;
 			numberOfUsers := numberOfUsers + 1;
-		)
-		pre usernameExt <> "" and passwordExt <> "";
+		);
+		
 	-- ACCESSOR METHODS
 		
 	public getUserID: () ==> nat1

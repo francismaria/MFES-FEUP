@@ -27,8 +27,8 @@ operations
 			registerDate := mk_Date(dayExt, monthExt, yearExt);
 			ID := numberOfUsers;
 			numberOfUsers := numberOfUsers + 1;
-		)
-		pre usernameExt <> "" and passwordExt <> "";
+		);
+		
 	-- ACCESSOR METHODS
 		
 	public getUserID: () ==> nat1
