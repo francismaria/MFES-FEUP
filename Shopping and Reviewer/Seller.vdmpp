@@ -1,4 +1,3 @@
-
 class Seller is subclass of User
 
 types
@@ -9,7 +8,7 @@ values
 instance variables
 -- conjunto de produtos que está a vender
 -- conjunto de avaliações 
-
+private availableProducts : seq of String := [];
 
 operations
 

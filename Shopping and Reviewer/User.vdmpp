@@ -56,13 +56,15 @@ operations
 	setNewUsername(newUsername) ==
 	(
 		username := newUsername;
-	);
+	)
+	pre newUsername <> "";
 		
 	public setNewPassword: String ==> ()
 	setNewPassword(newPassword) ==
 	(
 		password := newPassword;
-	);
+	)
+	pre newPassword <> "";
 		
 		
 functions
