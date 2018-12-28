@@ -1,0 +1,20 @@
+class TestsRun
+-- This class is just a simple test runner.
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+operations
+	public static main: () ==> ()
+	main() ==
+	(
+		UserTest`main();
+		ProductTest`main();
+	);
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end TestsRun
