@@ -1,4 +1,4 @@
-class UserTest
+class UserTest is subclass of MyTest
 types
 -- TODO Define types here
 values
@@ -6,16 +6,58 @@ values
 instance variables
 	--u1 : User := new User("User1", "password1", 10,11,11); 
 operations
+
+	-- Tests: 
+	--		: the creation of a user of type Seller.
+	--		: the creation of a user of type Costumer.
 	private createNewUser: () ==> ()
 	createNewUser() ==
 	(
-		return ;
+		dcl seller : Seller, costumer : Seller;
+		
+		seller := new Seller("TestSeller", "password1", 12,12,12);
+		costumer := new Seller("TestCostumer", "password1", 12,12,12);
+		
+		assert(seller.getUsername() = "TestSeller");
+		assert(costumer.getUsername() = "TestCostumer");
 	);
 	
+	-- Tests:
+	--		: the correct update of the total number of users.
+	private correctNumberOfUsers: () ==> ()
+	correctNumberOfUsers() ==
+	(
+		dcl seller : Seller, costumer : User, costumer2 : User, seller2 : Seller, seller3 : Seller;
+		assert(User`getNumberOfUsers() = 2);
+		
+		seller := new Seller("TestSeller", "password1", 12,12,12);
+		--costumer := new Costumer("TestCostumer", "password1", 12,12,12);
+		seller2 := new Seller("TestSeller2", "password1", 12,12,12);
+		seller3 := new Seller("TestSeller3", "password1", 12,12,12);
+		--costumer2 := new Costumer("TestCostumer2", "password1", 12,12,12);
+		assert(User`getNumberOfUsers() = 5);
+	);
+	
+	-- Tests:
+	--		: the substitution of the a user username.
+	private changeUsername: () ==> ()
+	changeUsername() ==
+	(
+		dcl seller : Seller := new Seller("TestSeller", "password1", 12,12,12);
+		assert(seller.getUsername() = "TestSeller");
+		seller.setNewUsername("NewTestSellerUsername");
+		assert(seller.getUsername() = "NewTestSellerUsername");
+	);
+	
+	-- Entry Point
 	public static main : () ==> ()
 	main() ==
 	(
-		new UserTest().createNewUser();	
+		dcl test : UserTest := new UserTest();
+	
+		test.createNewUser();
+		test.correctNumberOfUsers();
+		test.changeUsername();
 	);	
 	
 functions

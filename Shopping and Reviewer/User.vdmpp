@@ -1,26 +1,28 @@
 class User
+
 types
 	public String = seq of char;
-	
-	public static UserType = <SELLER> | <COSTUMER>;
-	
 	public Date :: year : nat1
 								 month : nat1
 								 day : nat1		
 	inv d == d.month <= 12 and d.year >= 0
 			and d.day < 31;
-			
+	
+	public static UserType = <SELLER> | <COSTUMER>;
+	
+	
 values
-
+	--constantes
+	
 instance variables
 
-	private ID : nat1;
+	private ID : nat1 := 1;
 	private username : String;
 	private password : String;
 	private registerDate : Date;
 	
-	static numberOfUsers : nat1 := 1; 
-	inv ID <= numberOfUsers;
+	private static numberOfUsers : int := 0; 
+	inv ID <= numberOfUsers and ID > 0;
 	
 operations
 
@@ -32,8 +34,8 @@ operations
 			username := usernameExt;
 			password := passwordExt;
 			registerDate := mk_Date(dayExt, monthExt, yearExt);
-			ID := numberOfUsers;
 			numberOfUsers := numberOfUsers + 1;
+			ID := numberOfUsers;
 		)
 		pre usernameExt <> "" and passwordExt <> "";
 		
@@ -55,6 +57,12 @@ operations
 	-- abstract function to check what type the user is (seller or customer)
 	public getType: () ==> UserType
 	getType() == is subclass responsibility;
+	
+	public static getNumberOfUsers: () ==> int
+	getNumberOfUsers() ==
+	(
+		return numberOfUsers;
+	);
 	
 		
 	-- MODIFIER METHODS

@@ -1,0 +1,16 @@
+class MyTest
+types
+values
+instance variables
+operations
+	
+	-- Assert if something is true
+	protected assert: bool ==> ()
+	assert(arg) == return
+	pre arg;
+	
+functions
+traces
+
+
+end MyTest
