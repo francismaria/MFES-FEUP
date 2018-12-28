@@ -1,0 +1,55 @@
+class ProductTest is subclass of MyTest
+types
+values
+instance variables
+	private numProds : int := 0;
+	
+operations
+	-------------------------------------------------------------
+	-- Tests: 
+	--		: the creation of a new product.
+	--		: the retrieval of the product ID.
+	-------------------------------------------------------------
+	private createNewProduct: () ==> ()
+	createNewProduct() ==
+	(
+		dcl prod : Product;
+		prod := new Product("p1", "description1", 12.99);
+		numProds := numProds+1;
+		
+		assert(prod.getID() = numProds);
+	);
+	
+		-------------------------------------------------------------
+		-- Tests: 
+		--		: the retrieval of the product ID.
+		--		: the retrieval of the product name.
+		--		: the retrieval of the product description.
+		--		: the retrieval of the product price.
+		-------------------------------------------------------------
+	private checkInformation: () ==> ()
+	checkInformation() ==
+	(
+		dcl prod : Product;
+		prod := new Product("p1", "description1", 12.99);
+		numProds := numProds+1;
+		
+		assert(prod.getID() = numProds);
+		assert(prod.getName() = "p1");
+		assert(prod.getDescription() = "description1");
+		assert(prod.getPrice() = 12.99);
+	);
+	
+	public static main: () ==> ()
+	main() ==
+	(
+		dcl test : ProductTest := new ProductTest();
+		
+		test.createNewProduct();
+		test.checkInformation();
+	);
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end ProductTest

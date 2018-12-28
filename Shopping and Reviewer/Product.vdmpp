@@ -13,6 +13,7 @@ instance variables
 	private name : String;
 	private description : String;
 	private price : Float;
+	private quantity : int;
 	private sellers : Sellers := {};
 	
 	private static numberOfProducts : int := 0;
@@ -29,6 +30,7 @@ operations
 		name := newName;
 		description := newDescription;
 		price := newPrice;
+		quantity := 1;
 		numberOfProducts := numberOfProducts + 1;
 		ID := numberOfProducts;
 	)
@@ -59,6 +61,12 @@ operations
 	getPrice() ==
 	(
 		return price;
+	);
+	
+	public getQuantity: () ==> int
+	getQuantity() == 
+	(
+		return quantity;
 	);
 	
 	public getSellers: () ==> Sellers
