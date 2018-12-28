@@ -2,6 +2,8 @@ class User
 types
 	public String = seq of char;
 	
+	public static UserType = <SELLER> | <COSTUMER>;
+	
 	public Date :: year : nat1
 								 month : nat1
 								 day : nat1		
@@ -49,7 +51,11 @@ operations
 	public getRegisterDate: () ==> Date
 	getRegisterDate() ==
 		return registerDate;
-		
+	
+	-- abstract function to check what type the user is (seller or customer)
+	public getType: () ==> UserType
+	getType() == is subclass responsibility;
+	
 		
 	-- MODIFIER METHODS
 	

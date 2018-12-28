@@ -70,7 +70,7 @@ operations
 	public static getNumberOfProducts: () ==> int
 	getNumberOfProducts() ==
 	(
-		return numberOfProducts-1;
+		return numberOfProducts;
 	);
 	
 	-- MODIFIER METHODS

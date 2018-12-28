@@ -8,8 +8,9 @@ values
 
 instance variables
 -- conjunto de produtos que está a vender
--- conjunto de avaliações 
 	public availableProducts : Products := {};
+	
+	-- conjunto de produtos que está a vender
 
 operations
 
@@ -28,6 +29,12 @@ operations
 	getAllProducts() == 
 	(
 		return availableProducts;
+	);
+	
+	public getType: () ==> UserType
+	getType() ==
+	(
+		return <SELLER>;
 	);
 	
 	
