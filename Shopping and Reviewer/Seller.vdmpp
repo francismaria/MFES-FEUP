@@ -13,8 +13,9 @@ instance variables
 	-- conjunto de produtos que está a vender
 
 operations
-
+	------------------------------------------
 	-- CONSTRUCTOR
+	------------------------------------------
 	
 	public Seller : String * String * nat1 * nat1 * nat1 ==> Seller
 	Seller(usernameExt, passwordExt, dayExt, monthExt, yearExt) == 
@@ -22,8 +23,9 @@ operations
 		User`User(usernameExt, passwordExt, dayExt, monthExt, yearExt);
 	);
 	
-	
+	------------------------------------------
 	-- ACCESSOR METHODS 
+	------------------------------------------
 	
 	public getAllProducts: () ==> Products
 	getAllProducts() == 
@@ -37,8 +39,9 @@ operations
 		return <SELLER>;
 	);
 	
-	
+	------------------------------------------
 	-- MODIFIER METHODS
+	------------------------------------------
 	
 	public addNewProduct: Product ==> ()
 	addNewProduct(newProduct) ==
@@ -52,4 +55,5 @@ functions
 -- TODO Define functiones here
 traces
 -- TODO Define Combinatorial Test Traces here
+
 end Seller

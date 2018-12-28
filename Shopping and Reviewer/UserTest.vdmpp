@@ -23,7 +23,6 @@ operations
 		costumer := new Seller("TestCostumer", "password1", 12,12,12);
 		numUsers := numUsers+1;
 		
-		
 		assert(seller.getUsername() = "TestSeller");
 		assert(costumer.getUsername() = "TestCostumer");
 	);

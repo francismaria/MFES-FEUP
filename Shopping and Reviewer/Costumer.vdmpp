@@ -1,0 +1,14 @@
+class Costumer is subclass of User
+types
+
+values
+
+instance variables
+
+operations
+	-- writtenReviews
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Costumer

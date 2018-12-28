@@ -13,8 +13,9 @@ instance variables
 	private registeredProducts : Products := {};
 	
 operations
-	
+	------------------------------------------
 	-- CONSTRUCTOR
+	------------------------------------------
 	
 	public Shop: String ==> Shop
 	Shop(shopName) ==
@@ -22,8 +23,9 @@ operations
 		name := shopName;
 	);
 	
-	
+	------------------------------------------
 	-- ACCESSOR METHODS
+	------------------------------------------
 	
 	public getRegisteredUsers: () ==> Users
 	getRegisteredUsers() ==
@@ -67,8 +69,9 @@ operations
 		return num;
 	);
 	
-	
+	------------------------------------------
 	-- MODIFIER METHODS
+	------------------------------------------
 	
 	public addNewUser: User ==> ()
 	addNewUser(newUser) ==

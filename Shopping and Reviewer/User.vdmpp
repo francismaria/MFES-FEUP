@@ -1,4 +1,5 @@
 class User
+--abstract class
 
 types
 	public String = seq of char;
@@ -15,7 +16,6 @@ values
 	--constantes
 	
 instance variables
-
 	private ID : nat1 := 1;
 	private username : String;
 	private password : String;
@@ -25,8 +25,9 @@ instance variables
 	inv ID <= numberOfUsers and ID > 0;
 	
 operations
-
+	------------------------------------------
 	-- CONSTRUCTOR
+	------------------------------------------
 
 	public User : String * String * nat1 * nat1 * nat1 ==> User
 	User(usernameExt, passwordExt, dayExt, monthExt, yearExt) == 
@@ -39,8 +40,9 @@ operations
 		)
 		pre usernameExt <> "" and passwordExt <> "";
 		
-		
+	------------------------------------------
 	-- ACCESSOR METHODS
+	------------------------------------------
 		
 	public getUserID: () ==> nat1
 	getUserID() == 
@@ -64,8 +66,9 @@ operations
 		return numberOfUsers;
 	);
 	
-		
+	------------------------------------------
 	-- MODIFIER METHODS
+	------------------------------------------
 	
 	public setNewUsername: String ==> ()
 	setNewUsername(newUsername) ==
