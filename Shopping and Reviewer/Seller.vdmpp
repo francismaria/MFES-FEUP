@@ -1,7 +1,7 @@
 class Seller is subclass of User
 
 types
-  public Products = set of String;
+  public Products = set of Product;
 
 values
 
@@ -33,12 +33,12 @@ operations
 	
 	-- MODIFIER METHODS
 	
-	public addNewProduct: String ==> ()
+	public addNewProduct: Product ==> ()
 	addNewProduct(newProduct) ==
 	(
 		availableProducts := availableProducts union {newProduct};
 	)
-	pre newProduct <> "";
+	--pre newProduct <> nil;
 	
 	
 functions

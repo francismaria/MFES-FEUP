@@ -3,6 +3,7 @@ class Product
 types
 	public String = seq of char;
 	public Float = real;
+	public Sellers = set of User;
 	
 values
 
@@ -12,6 +13,7 @@ instance variables
 	private name : String;
 	private description : String;
 	private price : Float;
+	private sellers : Sellers := {};
 	
 	private static numberOfProducts : int := 0;
 	
@@ -31,7 +33,7 @@ operations
 		ID := numberOfProducts;
 	)
 	pre newName <> "" and newDescription <> "" and newPrice >= 0;
-	
+
 	
 	-- ACCESSOR METHODS
 	
@@ -59,6 +61,18 @@ operations
 		return price;
 	);
 	
+	public getSellers: () ==> Sellers
+	getSellers() ==
+	(
+		return sellers;
+	);
+	
+	public static getNumberOfProducts: () ==> int
+	getNumberOfProducts() ==
+	(
+		return numberOfProducts-1;
+	);
+	
 	-- MODIFIER METHODS
 	
 	public changePrice: Float ==> ()
@@ -67,6 +81,13 @@ operations
 		price := newPrice;
 	)
 	pre price <> newPrice;
+	
+	
+	public addSeller: Seller ==> ()
+	addSeller(newSeller) ==
+	(
+		sellers := sellers union {newSeller};
+	);
 	
 	
 functions

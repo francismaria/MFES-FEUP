@@ -1,0 +1,79 @@
+class Shop
+
+types
+	public String = seq of char;
+	public Users = set of User;
+	public Products = set of Product;
+	
+values
+instance variables
+	private name : String;
+	private registeredUsers : Users := {};
+	private registeredProducts : Products := {};
+	
+operations
+	
+	-- CONSTRUCTOR
+	
+	public Shop: String ==> Shop
+	Shop(shopName) ==
+	(
+		name := shopName;
+	);
+	
+	
+	-- ACCESSOR METHODS
+	
+	public getRegisteredUsers: () ==> Users
+	getRegisteredUsers() ==
+	(
+		return registeredUsers;
+	);
+	
+	public getRegisteredProducts: () ==> Products
+	getRegisteredProducts() ==
+	(
+		return registeredProducts;
+	);
+	
+	public getNumberOfProducts: () ==> int
+	getNumberOfProducts() ==
+	(
+		return Product`getNumberOfProducts();
+	);
+	
+	
+	-- MODIFIER METHODS
+	
+	--public addNewProduct: Product ==> ()
+	--addNewProduct(newProduct) ==
+	--(
+--		if not productAlreadyExists(newProduct)
+	--	then registeredProducts := registeredProducts union {newProduct};
+		--else newProduct.increaseQuantity(););
+	--pre newProduct <> nil;
+	
+	
+	
+	public addNewUser: User ==> ()
+	addNewUser(newUser) ==
+	(
+		registeredUsers := registeredUsers union {newUser};
+	)
+	pre newUser not in set registeredUsers;
+	
+	
+	-- PRIVATE METHODS
+	private productAlreadyExists: Product ==> bool
+	productAlreadyExists(product) ==
+	(
+		for all p in set registeredProducts do
+			if product = p
+			then return true;
+		return false;
+	);
+	
+functions
+traces
+
+end Shop
