@@ -1,52 +1,82 @@
 class UserTest is subclass of MyTest
+
 types
--- TODO Define types here
 values
--- TODO Define values here
 instance variables
-	--u1 : User := new User("User1", "password1", 10,11,11); 
+	-- This variable keeps track of the number of users that were created during the tests.
+	-- This way to check if numberOfUsers is correct it is not necessary to have harcoded values.
+	private numUsers : int := 0;
 operations
 
+	-------------------------------------------------------------
 	-- Tests: 
 	--		: the creation of a user of type Seller.
 	--		: the creation of a user of type Costumer.
+	-------------------------------------------------------------
 	private createNewUser: () ==> ()
 	createNewUser() ==
 	(
 		dcl seller : Seller, costumer : Seller;
 		
 		seller := new Seller("TestSeller", "password1", 12,12,12);
+		numUsers := numUsers+1;
 		costumer := new Seller("TestCostumer", "password1", 12,12,12);
+		numUsers := numUsers+1;
+		
 		
 		assert(seller.getUsername() = "TestSeller");
 		assert(costumer.getUsername() = "TestCostumer");
 	);
 	
+	-------------------------------------------------------------
 	-- Tests:
 	--		: the correct update of the total number of users.
+	--		: the correct attribuition of the user ID.
+	-------------------------------------------------------------
 	private correctNumberOfUsers: () ==> ()
 	correctNumberOfUsers() ==
 	(
 		dcl seller : Seller, costumer : User, costumer2 : User, seller2 : Seller, seller3 : Seller;
-		assert(User`getNumberOfUsers() = 2);
+		assert(User`getNumberOfUsers() = numUsers);
 		
 		seller := new Seller("TestSeller", "password1", 12,12,12);
+		numUsers := numUsers+1;
 		--costumer := new Costumer("TestCostumer", "password1", 12,12,12);
 		seller2 := new Seller("TestSeller2", "password1", 12,12,12);
+		numUsers := numUsers+1;
 		seller3 := new Seller("TestSeller3", "password1", 12,12,12);
+		numUsers := numUsers+1;
 		--costumer2 := new Costumer("TestCostumer2", "password1", 12,12,12);
-		assert(User`getNumberOfUsers() = 5);
+		assert(User`getNumberOfUsers() = numUsers);
+		assert(seller3.getUserID() = numUsers);
 	);
 	
+	-------------------------------------------------------------
 	-- Tests:
-	--		: the substitution of the a user username.
+	--		: the substitution of a user's username.
+	-------------------------------------------------------------
 	private changeUsername: () ==> ()
 	changeUsername() ==
 	(
 		dcl seller : Seller := new Seller("TestSeller", "password1", 12,12,12);
+		numUsers := numUsers+1;
+		
 		assert(seller.getUsername() = "TestSeller");
 		seller.setNewUsername("NewTestSellerUsername");
 		assert(seller.getUsername() = "NewTestSellerUsername");
+	);
+	
+	-------------------------------------------------------------
+	-- Tests:
+	--		: the type of the user.
+	-------------------------------------------------------------
+	private correctType: () ==> ()
+	correctType() ==
+	(
+		dcl seller : Seller := new Seller("TestSeller", "password1", 12,12,12);
+		numUsers := numUsers+1;
+		
+		assert(seller.getType() = <SELLER>);
 	);
 	
 	-- Entry Point
@@ -58,6 +88,7 @@ operations
 		test.createNewUser();
 		test.correctNumberOfUsers();
 		test.changeUsername();
+		test.correctType();
 	);	
 	
 functions
