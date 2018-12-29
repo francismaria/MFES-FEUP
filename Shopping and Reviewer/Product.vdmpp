@@ -21,8 +21,9 @@ instance variables
 	inv ID <= numberOfProducts and ID > 0;
 	
 operations
-
+	------------------------------------------
 	-- CONSTRUCTOR
+	------------------------------------------
 	
 	public Product: String * String * Float ==> Product
 	Product(newName, newDescription, newPrice) ==
@@ -36,8 +37,9 @@ operations
 	)
 	pre newName <> "" and newDescription <> "" and newPrice >= 0;
 
-	
-	-- ACCESSOR METHODS
+	------------------------------------------
+	-- ACCESSOR METHODS 
+	------------------------------------------
 	
 	public getID: () ==> nat1
 	getID() ==
@@ -81,7 +83,9 @@ operations
 		return numberOfProducts;
 	);
 	
+	------------------------------------------
 	-- MODIFIER METHODS
+	------------------------------------------
 	
 	public changePrice: Float ==> ()
 	changePrice(newPrice) ==

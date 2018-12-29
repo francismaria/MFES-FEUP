@@ -40,6 +40,24 @@ operations
 		assert(prod.getPrice() = 12.99);
 	);
 	
+		-------------------------------------------------------------
+		-- Tests: 
+		--		: the successful addition of a seller to a product
+		-------------------------------------------------------------
+	private checkSellers: () ==> ()
+	checkSellers() ==
+	(
+		dcl prod : Product, seller : Seller;
+		prod := new Product("p1", "description1", 12.99);
+		numProds := numProds+1;
+		
+		assert(prod.getSellers() = {});
+		seller := new Seller("Seller1", "passwd", 12,12,12);
+		prod.addSeller(seller);
+		assert(prod.getSellers() = {seller});
+	);
+	
+	
 	public static main: () ==> ()
 	main() ==
 	(
@@ -47,6 +65,7 @@ operations
 		
 		test.createNewProduct();
 		test.checkInformation();
+		test.checkSellers();
 	);
 functions
 -- TODO Define functiones here
