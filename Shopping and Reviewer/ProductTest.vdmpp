@@ -30,12 +30,12 @@ operations
 	private checkInformation: () ==> ()
 	checkInformation() ==
 	(
-		dcl prod : Product;
-		prod := new Product("p1", "description1", 12.99);
+		dcl prod : Product := new Product("p1", "description1", 12.99);
 		numProds := numProds+1;
 		
 		assert(prod.getID() = numProds);
 		assert(prod.getName() = "p1");
+		assert(prod.getQuantity() = 1);
 		assert(prod.getDescription() = "description1");
 		assert(prod.getPrice() = 12.99);
 	);
