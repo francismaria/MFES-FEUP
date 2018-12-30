@@ -8,10 +8,14 @@ values
 
 instance variables
 -- conjunto de produtos que está a vender
-	public availableProducts : Products := {};
+	--private availableProducts : Products := {};
 	
-	-- conjunto de produtos que está a vender
-
+	private products : map nat1 to Product := { |-> };
+	
+	--var to keep track of the seller products IDS
+	private productsIDs : nat1 := 1;
+	
+	
 operations
 	------------------------------------------
 	-- CONSTRUCTOR
@@ -26,11 +30,18 @@ operations
 	------------------------------------------
 	-- ACCESSOR METHODS 
 	------------------------------------------
+
+	public getProduct: nat1 ==> Product
+	getProduct(id) ==
+	(
+		return products(id);
+	)
+	pre id in set dom products;
 	
 	public getAllProducts: () ==> Products
-	getAllProducts() == 
+	getAllProducts() ==
 	(
-		return availableProducts;
+		return rng products;
 	);
 	
 	public getType: () ==> UserType
@@ -45,8 +56,9 @@ operations
 	
 	public addNewProduct: Product ==> ()
 	addNewProduct(newProduct) ==
-	(
-		availableProducts := availableProducts union {newProduct};
+	(	
+		products := products munion { productsIDs |-> newProduct };
+		productsIDs := productsIDs + 1;
 	)
 	--pre newProduct <> nil;
 	

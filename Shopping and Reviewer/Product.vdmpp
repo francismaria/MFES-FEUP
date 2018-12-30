@@ -3,7 +3,6 @@ class Product
 types
 	public String = seq of char;
 	public Float = real;
-	public Sellers = set of User;
 	
 values
 
@@ -14,7 +13,6 @@ instance variables
 	private description : String;
 	private price : Float;
 	private quantity : int;
-	private sellers : Sellers := {};
 	
 	private static numberOfProducts : int := 0;
 	
@@ -71,12 +69,6 @@ operations
 		return quantity;
 	);
 	
-	public getSellers: () ==> Sellers
-	getSellers() ==
-	(
-		return sellers;
-	);
-	
 	public static getNumberOfProducts: () ==> int
 	getNumberOfProducts() ==
 	(
@@ -93,14 +85,7 @@ operations
 		price := newPrice;
 	)
 	pre price <> newPrice;
-	
-	
-	public addSeller: Seller ==> ()
-	addSeller(newSeller) ==
-	(
-		sellers := sellers union {newSeller};
-	);
-	
+
 	
 functions
 -- descontos
