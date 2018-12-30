@@ -21,6 +21,7 @@ instance variables
 	private password : String;
 	
 	private static numberOfUsers : int := 0; 
+	
 	inv ID <= numberOfUsers and ID > 0;
 	
 operations
