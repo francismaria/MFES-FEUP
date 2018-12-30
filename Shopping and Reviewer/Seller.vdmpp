@@ -2,6 +2,7 @@ class Seller is subclass of User
 
 types
   public Products = set of Product;
+  public ProductName = seq of char;
 
 values
 
@@ -37,6 +38,7 @@ operations
 		return products(id);
 	)
 	pre id in set dom products;
+
 	
 	--returns the range of products in the map
 	public getAllProducts: () ==> Products

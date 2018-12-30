@@ -92,6 +92,13 @@ operations
 		quantity := quantity + 1;
 	);
 	
+	public decrementQuantity: () ==> ()
+	decrementQuantity() ==
+	(
+		quantity := quantity - 1;
+	)
+	pre quantity > 0;
+	
 	------------------------------------------
 	-- COMPARISION METHODS
 	------------------------------------------
