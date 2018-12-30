@@ -20,6 +20,7 @@ instance variables
 	
 	inv ID <= numberOfProducts and ID > 0;
 	inv rating >= 0 and rating <= 5;
+	inv price >= 0.00;
 	
 operations
 	------------------------------------------
