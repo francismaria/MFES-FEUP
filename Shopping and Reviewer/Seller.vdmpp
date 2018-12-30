@@ -38,7 +38,6 @@ operations
 		return products(id);
 	)
 	pre id in set dom products;
-
 	
 	--returns the range of products in the map
 	public getAllProducts: () ==> Products

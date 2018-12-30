@@ -13,6 +13,7 @@ instance variables
 	private description : String;
 	private price : Float;
 	private quantity : int;
+	private reviews : set of Review := {};
 	
 	private static numberOfProducts : int := 0;
 	
@@ -78,6 +79,12 @@ operations
 	------------------------------------------
 	-- MODIFIER METHODS
 	------------------------------------------
+	
+	public addReview: Review ==> ()
+	addReview(userReview) ==
+	(
+		reviews := reviews union {userReview};
+	);
 	
 	public changePrice: Float ==> ()
 	changePrice(newPrice) ==

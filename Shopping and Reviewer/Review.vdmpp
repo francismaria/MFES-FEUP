@@ -5,10 +5,48 @@ types
 values
 instance variables
 	private text : String;
-	private username : String;
+	private classification : nat1;
+	private author : User;
+	
+	inv classification > 0 and classification <= 5;
 	
 operations
--- TODO Define operations here
+	------------------------------------------
+	-- CONSTRUCTOR
+	------------------------------------------
+	
+	public Review: String * nat1 * User ==> Review
+	Review(reviewText, reviewClassification, reviewUser) ==
+	(
+		text := reviewText;
+		classification := reviewClassification;
+		author := reviewUser;
+	)
+	pre reviewClassification > 0 and reviewClassification <= 5;
+	
+	------------------------------------------
+	-- ACCESSOR METHODS 
+	------------------------------------------
+	
+	public getText: () ==> String
+	getText() ==
+	(
+		return text;
+	);
+	
+	public getClassification: () ==> nat1
+	getClassification() ==
+	(
+		return classification;
+	);
+	
+	
+	public getAuthor: () ==> User
+	getAuthor() ==
+	(
+		return author;
+	);
+	
 functions
 -- TODO Define functiones here
 traces
