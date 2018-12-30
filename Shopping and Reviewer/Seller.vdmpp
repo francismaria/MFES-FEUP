@@ -7,7 +7,7 @@ values
 
 
 instance variables
-	-- conjunto de produtos que está a vender
+	-- product set representing the inventory of the items the seller is selling.
 	-- each product within the sellers product inventory is characterized by an ID.
 	private products : map nat1 to Product := { |-> };
 	
