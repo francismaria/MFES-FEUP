@@ -86,6 +86,23 @@ operations
 	)
 	pre price <> newPrice;
 
+	public incrementQuantity: () ==> ()
+	incrementQuantity() ==
+	(
+		quantity := quantity + 1;
+	);
+	
+	------------------------------------------
+	-- COMPARISION METHODS
+	------------------------------------------
+	
+	public isEqual: Product ==> bool
+	isEqual(newProduct) ==
+	(
+		return name = newProduct.getName() 
+			and description = newProduct.getDescription()
+			and price = newProduct.getPrice();
+	);
 	
 functions
 -- descontos

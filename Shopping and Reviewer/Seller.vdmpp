@@ -7,12 +7,11 @@ values
 
 
 instance variables
--- conjunto de produtos que está a vender
-	--private availableProducts : Products := {};
-	
+	-- conjunto de produtos que está a vender
+	-- each product within the sellers product inventory is characterized by an ID.
 	private products : map nat1 to Product := { |-> };
 	
-	--var to keep track of the seller products IDS
+	-- var to keep track of the seller products IDS
 	private productsIDs : nat1 := 1;
 	
 	
@@ -31,6 +30,7 @@ operations
 	-- ACCESSOR METHODS 
 	------------------------------------------
 
+	-- Get the product by its ID in the inventory.
 	public getProduct: nat1 ==> Product
 	getProduct(id) ==
 	(
@@ -38,6 +38,7 @@ operations
 	)
 	pre id in set dom products;
 	
+	--returns the range of products in the map
 	public getAllProducts: () ==> Products
 	getAllProducts() ==
 	(
@@ -54,13 +55,26 @@ operations
 	-- MODIFIER METHODS
 	------------------------------------------
 	
+	-- This function adds a new product to the seller's inventory.
+	-- If the product already exists in the inventory then it just increments its quantity.
+	-- Otherwise, it adds the new product to the inventory.
 	public addNewProduct: Product ==> ()
 	addNewProduct(newProduct) ==
 	(	
-		products := products munion { productsIDs |-> newProduct };
-		productsIDs := productsIDs + 1;
-	)
-	--pre newProduct <> nil;
+		dcl existingProducts : set of Product := rng products, productExists : bool := false;
+	
+		for all p in set existingProducts do
+			if newProduct.isEqual(p)
+			then (
+				p.incrementQuantity();
+				productExists := true;
+			);
+			
+		if productExists = false then (
+			products := products munion { productsIDs |-> newProduct };
+			productsIDs := productsIDs + 1;
+		)
+	);
 	
 	
 functions
