@@ -1,0 +1,16 @@
+class Review
+types
+	public String = seq of char;
+	
+values
+instance variables
+	private text : String;
+	private username : String;
+	
+operations
+-- TODO Define operations here
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Review

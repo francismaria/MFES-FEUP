@@ -52,7 +52,7 @@ operations
 		numProds := numProds+1;
 		
 		assert(prod.getSellers() = {});
-		seller := new Seller("Seller1", "passwd", 12,12,12);
+		seller := new Seller("Seller1", "passwd");
 		prod.addSeller(seller);
 		assert(prod.getSellers() = {seller});
 	);

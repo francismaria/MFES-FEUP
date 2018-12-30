@@ -18,9 +18,9 @@ operations
 	(
 		dcl seller : Seller, costumer : Seller;
 		
-		seller := new Seller("TestSeller", "password1", 12,12,12);
+		seller := new Seller("TestSeller", "password1");
 		numUsers := numUsers+1;
-		costumer := new Seller("TestCostumer", "password1", 12,12,12);
+		costumer := new Seller("TestCostumer", "password1");
 		numUsers := numUsers+1;
 		
 		assert(seller.getUsername() = "TestSeller");
@@ -38,12 +38,12 @@ operations
 		dcl seller : Seller, costumer : User, costumer2 : User, seller2 : Seller, seller3 : Seller;
 		assert(User`getNumberOfUsers() = numUsers);
 		
-		seller := new Seller("TestSeller", "password1", 12,12,12);
+		seller := new Seller("TestSeller", "password1");
 		numUsers := numUsers+1;
 		--costumer := new Costumer("TestCostumer", "password1", 12,12,12);
-		seller2 := new Seller("TestSeller2", "password1", 12,12,12);
+		seller2 := new Seller("TestSeller2", "password1");
 		numUsers := numUsers+1;
-		seller3 := new Seller("TestSeller3", "password1", 12,12,12);
+		seller3 := new Seller("TestSeller3", "password1");
 		numUsers := numUsers+1;
 		--costumer2 := new Costumer("TestCostumer2", "password1", 12,12,12);
 		assert(User`getNumberOfUsers() = numUsers);
@@ -57,7 +57,7 @@ operations
 	private changeUsername: () ==> ()
 	changeUsername() ==
 	(
-		dcl seller : Seller := new Seller("TestSeller", "password1", 12,12,12);
+		dcl seller : Seller := new Seller("TestSeller", "password1");
 		numUsers := numUsers+1;
 		
 		assert(seller.getUsername() = "TestSeller");
@@ -72,7 +72,7 @@ operations
 	private correctType: () ==> ()
 	correctType() ==
 	(
-		dcl seller : Seller := new Seller("TestSeller", "password1", 12,12,12);
+		dcl seller : Seller := new Seller("TestSeller", "password1");
 		numUsers := numUsers+1;
 		
 		assert(seller.getType() = <SELLER>);

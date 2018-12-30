@@ -17,10 +17,10 @@ operations
 	-- CONSTRUCTOR
 	------------------------------------------
 	
-	public Seller : String * String * nat1 * nat1 * nat1 ==> Seller
-	Seller(usernameExt, passwordExt, dayExt, monthExt, yearExt) == 
+	public Seller : String * String ==> Seller
+	Seller(usernameExt, passwordExt) == 
 	(
-		User`User(usernameExt, passwordExt, dayExt, monthExt, yearExt);
+		User`User(usernameExt, passwordExt);
 	);
 	
 	------------------------------------------

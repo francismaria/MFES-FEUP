@@ -19,7 +19,6 @@ instance variables
 	private ID : nat1 := 1;
 	private username : String;
 	private password : String;
-	private registerDate : Date;
 	
 	private static numberOfUsers : int := 0; 
 	inv ID <= numberOfUsers and ID > 0;
@@ -29,12 +28,11 @@ operations
 	-- CONSTRUCTOR
 	------------------------------------------
 
-	public User : String * String * nat1 * nat1 * nat1 ==> User
-	User(usernameExt, passwordExt, dayExt, monthExt, yearExt) == 
+	public User : String * String ==> User
+	User(usernameExt, passwordExt) == 
 		(
 			username := usernameExt;
 			password := passwordExt;
-			registerDate := mk_Date(dayExt, monthExt, yearExt);
 			numberOfUsers := numberOfUsers + 1;
 			ID := numberOfUsers;
 		)
@@ -51,10 +49,6 @@ operations
 	public getUsername: () ==> String
 	getUsername() == 
 		return username;
-		
-	public getRegisterDate: () ==> Date
-	getRegisterDate() ==
-		return registerDate;
 	
 	-- abstract function to check what type the user is (seller or customer)
 	public getType: () ==> UserType
@@ -75,7 +69,8 @@ operations
 	(
 		username := newUsername;
 	)
-	pre newUsername <> "";
+	pre newUsername <> ""
+	post username = newUsername;
 	
 		
 	public setNewPassword: String ==> ()
@@ -83,7 +78,8 @@ operations
 	(
 		password := newPassword;
 	)
-	pre newPassword <> "";
+	pre newPassword <> ""
+	post password = newPassword;
 		
 		
 functions
