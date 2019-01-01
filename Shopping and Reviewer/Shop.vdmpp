@@ -10,7 +10,7 @@ values
 instance variables
 	private name : String;
 	private registeredUsers : Users := {};
-	private registeredProducts : Products := {};
+	private registeredProducts : map User`String to Products := {|->}; 
 	
 operations
 	------------------------------------------
@@ -33,7 +33,7 @@ operations
 		return registeredUsers;
 	);
 	
-	public getRegisteredProducts: () ==> Products
+	public getRegisteredProducts: () ==> map User`String to Products
 	getRegisteredProducts() ==
 	(
 		return registeredProducts;
@@ -55,17 +55,6 @@ operations
 	getNumberOfCostumers() ==
 	(
 		return getNumberOfElements(<COSTUMER>);
-	);
-	
-	public updateProducts: () ==> ()
-	updateProducts() ==
-	(
-		for all user in set registeredUsers do
-			if user.getType() = <SELLER>
-			then (
-					dcl seller : Seller := user;
-					registeredProducts := registeredProducts union  seller.getAllProducts();
-			)
 	);
 	
 	-- Gets the number of users of a certain type (SELLER or COSTUMER)
@@ -93,13 +82,38 @@ operations
 	pre newUser not in set registeredUsers
 	post newUser in set registeredUsers;
 	
-	public addNewProduct: Product ==> ()
-	addNewProduct(newProduct) ==
+	--public addNewProduct: Product ==> ()
+	--addNewProduct(newProduct) ==
+	--(
+	--	registeredProducts := registeredProducts union {newProduct};
+	--)
+	--pre  newProduct not in set registeredProducts
+	--post  newProduct in set registeredProducts;
+	--public addNewProduct : Product * User`String ==> ()
+	--addNewProduct(newProduct, sellerUsername) ==
+	--(
+	--	registeredProducts := registeredProducts munion { sellerUsername |-> newProduct };
+	--);
+	
+		-- Updates all the products that exist in the shop
+	public updateProducts: () ==> ()
+	updateProducts() ==
 	(
-		registeredProducts := registeredProducts union {newProduct};
-	)
-	pre  newProduct not in set registeredProducts
-	post  newProduct in set registeredProducts
+		for all user in set registeredUsers do
+			if user.getType() = <SELLER>
+			then (
+					dcl seller : Seller := user, existsUserProducts : map User`String to Products := {|->};
+					existsUserProducts := {user.getUsername()} <: registeredProducts;
+					
+					if existsUserProducts = {|->}
+					then (
+						registeredProducts := registeredProducts munion { seller.getUsername() |-> seller.getAllProducts() };
+					)
+					else (
+						registeredProducts := registeredProducts ++ { seller.getUsername() |-> seller.getAllProducts() };
+					)
+			);
+	);
 	
 functions
 
