@@ -79,6 +79,12 @@ operations
 		return rating;
 	);
 	
+	public getReviews: () ==> set of Review
+	getReviews() ==
+	(
+		return reviews;
+	);
+	
 	public static getNumberOfProducts: () ==> int
 	getNumberOfProducts() ==
 	(
@@ -107,7 +113,8 @@ operations
 	incrementQuantity() ==
 	(
 		quantity := quantity + 1;
-	);
+	)
+	post quantity > 0;
 	
 	public decrementQuantity: () ==> ()
 	decrementQuantity() ==

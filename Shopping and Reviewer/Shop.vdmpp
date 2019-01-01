@@ -57,6 +57,7 @@ operations
 		return getNumberOfElements(<COSTUMER>);
 	);
 	
+	-- Gets the number of users of a certain type (SELLER or COSTUMER)
 	private getNumberOfElements: User`UserType ==> int
 	getNumberOfElements(elemsType) ==
 	(
