@@ -57,6 +57,17 @@ operations
 		return getNumberOfElements(<COSTUMER>);
 	);
 	
+	public updateProducts: () ==> ()
+	updateProducts() ==
+	(
+		for all user in set registeredUsers do
+			if user.getType() = <SELLER>
+			then (
+					dcl seller : Seller := user;
+					registeredProducts := registeredProducts union  seller.getAllProducts();
+			)
+	);
+	
 	-- Gets the number of users of a certain type (SELLER or COSTUMER)
 	private getNumberOfElements: User`UserType ==> int
 	getNumberOfElements(elemsType) ==
