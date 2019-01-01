@@ -24,6 +24,7 @@ operations
 		-- Tests: 
 		--		: the retrieval of the product ID.
 		--		: the retrieval of the product name.
+		--		: the retrieval of the product quantity.
 		--		: the retrieval of the product description.
 		--		: the retrieval of the product price.
 		-------------------------------------------------------------
@@ -49,7 +50,8 @@ operations
 	private checkRating: () ==> ()
 	checkRating() ==
 	(
-		dcl prod : Product, review: Review, review2: Review, costumer : Costumer, costumer2 : Costumer;
+		dcl prod : Product, review: Review, review2: Review,
+			costumer : Costumer, costumer2 : Costumer;
 		prod := new Product("p1", "description1", 12.99);
 		numProds := numProds+1;
 		
@@ -80,7 +82,7 @@ operations
 		assert(prod.getPrice() = 11.99);
 	);
 	
-		-------------------------------------------------------------
+	-------------------------------------------------------------
 	-- Tests: 
 	--		: the changing of the quantity of a product
 	--		: the quantity increment and decrement
@@ -97,6 +99,20 @@ operations
 		prod.decrementQuantity();
 		assert(prod.getQuantity() = 1);
 	);
+
+	-------------------------------------------------------------
+	-- Tests: 
+	--		: if two products are the same
+	-------------------------------------------------------------	
+	private areEqual: () ==> ()
+	areEqual() ==
+	(
+		dcl prod : Product, prod2 : Product;
+		prod := new Product("p1", "description1", 12.99);
+		prod2 := new Product("p1", "description1", 12.99);
+		
+		assert(prod.isEqual(prod2));
+	);
 	
 	--ENTRY POINT
 	public static main: () ==> ()
@@ -109,7 +125,9 @@ operations
 		test.checkRating();
 		test.changePrice();
 		test.changeQuantity();
+		test.areEqual();
 	);
+	
 functions
 -- TODO Define functiones here
 traces
