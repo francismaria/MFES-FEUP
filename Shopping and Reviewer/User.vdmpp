@@ -9,9 +9,9 @@ types
 	inv d == d.month <= 12 and d.year >= 0
 			and d.day < 31;
 	
+	-- sets the type of user: the seller and the costumer
 	public static UserType = <SELLER> | <COSTUMER>;
-	
-	
+
 values
 	--constantes
 	

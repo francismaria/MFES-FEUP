@@ -73,6 +73,12 @@ operations
 		return quantity;
 	);
 	
+	public getRating: () ==> Float
+	getRating() ==
+	(
+		return rating;
+	);
+	
 	public static getNumberOfProducts: () ==> int
 	getNumberOfProducts() ==
 	(

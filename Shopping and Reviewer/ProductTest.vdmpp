@@ -40,21 +40,29 @@ operations
 		assert(prod.getPrice() = 12.99);
 	);
 	
-		-------------------------------------------------------------
-		-- Tests: 
-		--		: the successful addition of a seller to a product
-		-------------------------------------------------------------
-	private checkSellers: () ==> ()
-	checkSellers() ==
+	-------------------------------------------------------------
+	-- Tests: 
+	--		: the successful update of the product rating.
+	--	* the product rating is only updated when a new review
+	--	* is added to the product.
+	-------------------------------------------------------------
+	private checkRating: () ==> ()
+	checkRating() ==
 	(
-		dcl prod : Product, seller : Seller;
+		dcl prod : Product, review: Review, review2: Review, costumer : Costumer, costumer2 : Costumer;
 		prod := new Product("p1", "description1", 12.99);
 		numProds := numProds+1;
 		
-		--assert(prod.getSellers() = {});
-		seller := new Seller("Seller1", "passwd");
-		--prod.addSeller(seller);
-		--assert(prod.getSellers() = {seller});
+		costumer := new Costumer("TestCostumer", "password1");
+		costumer2 := new Costumer("TestCostumer2", "password2");
+		review := new Review("Good product", 4, costumer);
+		review2 := new Review("Disappointed with this product", 2, costumer);
+		
+		assert(prod.getRating() = 0);
+		prod.addReview(review);
+		assert(prod.getRating() = 4.0);
+		prod.addReview(review2);
+		assert(prod.getRating() = 3.0);
 	);
 	
 	-------------------------------------------------------------
@@ -72,6 +80,24 @@ operations
 		assert(prod.getPrice() = 11.99);
 	);
 	
+		-------------------------------------------------------------
+	-- Tests: 
+	--		: the changing of the quantity of a product
+	--		: the quantity increment and decrement
+	-------------------------------------------------------------
+	private changeQuantity: () ==> ()
+	changeQuantity() ==
+	(
+		dcl prod : Product := new Product("p1", "description1", 12.99);
+		numProds := numProds+1;
+		
+		assert(prod.getQuantity() = 1);
+		prod.incrementQuantity();
+		assert(prod.getQuantity() = 2);
+		prod.decrementQuantity();
+		assert(prod.getQuantity() = 1);
+	);
+	
 	--ENTRY POINT
 	public static main: () ==> ()
 	main() ==
@@ -80,8 +106,9 @@ operations
 		
 		test.createNewProduct();
 		test.checkInformation();
-		--test.checkSellers();
+		test.checkRating();
 		test.changePrice();
+		test.changeQuantity();
 	);
 functions
 -- TODO Define functiones here
