@@ -16,11 +16,11 @@ operations
 	private createNewUser: () ==> ()
 	createNewUser() ==
 	(
-		dcl seller : Seller, costumer : Seller;
+		dcl seller : Seller, costumer : Costumer;
 		
 		seller := new Seller("TestSeller", "password1");
 		numUsers := numUsers+1;
-		costumer := new Seller("TestCostumer", "password1");
+		costumer := new Costumer("TestCostumer", "password1");
 		numUsers := numUsers+1;
 		
 		assert(seller.getUsername() = "TestSeller");
@@ -35,19 +35,22 @@ operations
 	private correctNumberOfUsers: () ==> ()
 	correctNumberOfUsers() ==
 	(
-		dcl seller : Seller, costumer : User, costumer2 : User, seller2 : Seller, seller3 : Seller;
+		dcl seller : Seller, costumer : Costumer, costumer2 : Costumer, seller2 : Seller, seller3 : Seller;
 		assert(User`getNumberOfUsers() = numUsers);
 		
 		seller := new Seller("TestSeller", "password1");
 		numUsers := numUsers+1;
-		--costumer := new Costumer("TestCostumer", "password1", 12,12,12);
+		costumer := new Costumer("TestCostumer", "password1");
+		numUsers := numUsers+1;
 		seller2 := new Seller("TestSeller2", "password1");
 		numUsers := numUsers+1;
 		seller3 := new Seller("TestSeller3", "password1");
 		numUsers := numUsers+1;
-		--costumer2 := new Costumer("TestCostumer2", "password1", 12,12,12);
+		costumer2 := new Costumer("TestCostumer2", "password1");
+		numUsers := numUsers+1;
+		
 		assert(User`getNumberOfUsers() = numUsers);
-		assert(seller3.getUserID() = numUsers);
+		assert(costumer2.getUserID() = numUsers);
 	);
 	
 	-------------------------------------------------------------
@@ -72,10 +75,14 @@ operations
 	private correctType: () ==> ()
 	correctType() ==
 	(
-		dcl seller : Seller := new Seller("TestSeller", "password1");
+		dcl seller : Seller, costumer : Costumer;
+		seller := new Seller("TestSeller", "password1");
+		numUsers := numUsers+1;
+		costumer := new Costumer("TestCostumer", "password1");
 		numUsers := numUsers+1;
 		
 		assert(seller.getType() = <SELLER>);
+		assert(costumer.getType() = <COSTUMER>);
 	);
 	
 	-- Entry Point
