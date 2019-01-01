@@ -81,21 +81,9 @@ operations
 	)
 	pre newUser not in set registeredUsers
 	post newUser in set registeredUsers;
-	
-	--public addNewProduct: Product ==> ()
-	--addNewProduct(newProduct) ==
-	--(
-	--	registeredProducts := registeredProducts union {newProduct};
-	--)
-	--pre  newProduct not in set registeredProducts
-	--post  newProduct in set registeredProducts;
-	--public addNewProduct : Product * User`String ==> ()
-	--addNewProduct(newProduct, sellerUsername) ==
-	--(
-	--	registeredProducts := registeredProducts munion { sellerUsername |-> newProduct };
-	--);
-	
-		-- Updates all the products that exist in the shop
+
+	-- Updates all the products that exist in the shop
+	-- It keeps all products listed with the respective association to the product's seller.
 	public updateProducts: () ==> ()
 	updateProducts() ==
 	(
