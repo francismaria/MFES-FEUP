@@ -104,8 +104,42 @@ operations
 			);
 	);
 	
+	------------------------------------------
+	-- AUTHORIZATION METHODS
+	------------------------------------------
+	
+	public login: String * String ==> bool
+	login(inputUsername, inputPassword) ==
+	(
+		for all user in set registeredUsers do
+			if user.getUsername() = inputUsername
+			then (
+				if user.checkCredentials(inputPassword)
+				then return true
+				else return false
+			);
+		return false;
+	);
+	
+	
+	public register: String * String * User`UserType ==> ()
+	register(newUsername, newPassword, type) ==
+	(
+		if type = <SELLER>
+		then (
+			dcl newSeller : Seller := new Seller(newUsername, newPassword);
+			self.addNewUser(newSeller);
+		)
+		else (
+			dcl newCostumer : Costumer := new Costumer(newUsername, newPassword);
+			self.addNewUser(newCostumer);
+		)
+	)
+	pre type = <SELLER> or type = <COSTUMER>;
+	
 functions
 
-traces
+
+traces 
 
 end Shop

@@ -19,6 +19,7 @@ instance variables
 	private ID : nat1 := 1;
 	private username : String;
 	private password : String;
+	private isLoggedIn : bool;
 	
 	private static numberOfUsers : int := 0; 
 	
@@ -36,6 +37,7 @@ operations
 			password := passwordExt;
 			numberOfUsers := numberOfUsers + 1;
 			ID := numberOfUsers;
+			isLoggedIn := false;
 		)
 		pre usernameExt <> "" and passwordExt <> "";
 		
@@ -50,6 +52,12 @@ operations
 	public getUsername: () ==> String
 	getUsername() == 
 		return username;
+		
+	public isLoggedIn: () ==> bool
+	isLoggedIn() ==
+	(
+		return isLoggedIn;
+	);
 	
 	-- abstract function to check what type the user is (seller or customer)
 	public getType: () ==> UserType
@@ -82,6 +90,16 @@ operations
 	pre newPassword <> ""
 	post password = newPassword;
 		
+	public checkCredentials: String ==> bool
+	checkCredentials(inputPassword) ==
+	( 
+		if password = inputPassword
+		then (
+			isLoggedIn := true;
+			return true;
+		);
+		return false;
+	);
 		
 functions
 	--verificar se palavra-passe é segura
