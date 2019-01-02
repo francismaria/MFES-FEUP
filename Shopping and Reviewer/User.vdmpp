@@ -19,7 +19,7 @@ instance variables
 	private ID : nat1 := 1;
 	private username : String;
 	private password : String;
-	private isLoggedIn : bool;
+	private loggedIn : bool;
 	
 	private static numberOfUsers : int := 0; 
 	
@@ -37,7 +37,7 @@ operations
 			password := passwordExt;
 			numberOfUsers := numberOfUsers + 1;
 			ID := numberOfUsers;
-			isLoggedIn := false;
+			loggedIn := false;
 		)
 		pre usernameExt <> "" and passwordExt <> "";
 		
@@ -56,7 +56,7 @@ operations
 	public isLoggedIn: () ==> bool
 	isLoggedIn() ==
 	(
-		return isLoggedIn;
+		return loggedIn;
 	);
 	
 	-- abstract function to check what type the user is (seller or customer)
@@ -95,7 +95,7 @@ operations
 	( 
 		if password = inputPassword
 		then (
-			isLoggedIn := true;
+			loggedIn := true;
 			return true;
 		);
 		return false;
