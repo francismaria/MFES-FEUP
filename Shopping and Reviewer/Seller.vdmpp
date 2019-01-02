@@ -82,7 +82,9 @@ operations
 	(
 		dcl product : Product := products(productID);
 		products := products :-> {product};
-	);
+	)
+	pre productID in set dom products
+	post productID not in set dom products;
 	
 functions
 -- TODO Define functiones here
