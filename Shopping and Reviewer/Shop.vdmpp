@@ -82,6 +82,7 @@ operations
 	pre newUser not in set registeredUsers
 	post newUser in set registeredUsers;
 
+
 	-- Updates all the products that exist in the shop
 	-- It keeps all products listed with the respective association to the product's seller.
 	public updateProducts: () ==> ()

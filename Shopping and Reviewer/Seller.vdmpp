@@ -77,6 +77,12 @@ operations
 		)
 	);
 	
+	public sellProduct: nat1 ==> ()
+	sellProduct(productID) ==
+	(
+		dcl product : Product := products(productID);
+		products := products :-> {product};
+	);
 	
 functions
 -- TODO Define functiones here
