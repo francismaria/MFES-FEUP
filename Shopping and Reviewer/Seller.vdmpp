@@ -77,6 +77,14 @@ operations
 		)
 	);
 	
+	public removeProduct: nat1 ==> ()
+	removeProduct(ID) ==
+	(
+		products := {ID} <-: products;
+	)
+	pre ID in set dom products
+	post ID not in set dom products;
+	
 	public sellProduct: nat1 ==> ()
 	sellProduct(productID) ==
 	(

@@ -6,6 +6,7 @@ instance variables
 	-- This variable keeps track of the number of users that were created during the tests.
 	-- This way to check if numberOfUsers is correct it is not necessary to have harcoded values.
 	private numUsers : int := 0;
+	
 operations
 
 	-------------------------------------------------------------
@@ -88,7 +89,7 @@ operations
 		assert(costumer.getType() = <COSTUMER>);
 	);
 	
-		-------------------------------------------------------------
+	-------------------------------------------------------------
 	-- Tests:
 	--		: the logging in and out of an user.
 	-------------------------------------------------------------

@@ -134,7 +134,6 @@ operations
 		loggedUser.logOut();
 	);
 	
-	
 	public register: String * String * User`UserType ==> ()
 	register(newUsername, newPassword, type) ==
 	(
