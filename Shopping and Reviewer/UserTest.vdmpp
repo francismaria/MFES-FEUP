@@ -63,9 +63,12 @@ operations
 		dcl seller : Seller := new Seller("TestSeller", "password1");
 		numUsers := numUsers+1;
 		
-		assert(seller.getUsername() = "TestSeller");
-		seller.setNewUsername("NewTestSellerUsername");
-		assert(seller.getUsername() = "NewTestSellerUsername");
+		if seller.checkCredentials("password1")
+		then (
+			assert(seller.getUsername() = "TestSeller");
+			seller.setNewUsername("NewTestSellerUsername");
+			assert(seller.getUsername() = "NewTestSellerUsername");
+		)
 	);
 	
 	-------------------------------------------------------------
@@ -85,6 +88,23 @@ operations
 		assert(costumer.getType() = <COSTUMER>);
 	);
 	
+		-------------------------------------------------------------
+	-- Tests:
+	--		: the logging in and out of an user.
+	-------------------------------------------------------------
+	private checkLogging: () ==> ()
+	checkLogging() ==
+	(
+		dcl seller : Seller;
+		seller := new Seller("TestSeller", "password1");
+		numUsers := numUsers + 1;
+		
+		assert(seller.checkCredentials("password1") = true);
+		assert(seller.isLoggedIn() = true);
+		seller.logOut();
+		assert(seller.isLoggedIn() = false);
+	);
+	
 	-- Entry Point
 	public static main : () ==> ()
 	main() ==
@@ -95,6 +115,7 @@ operations
 		test.correctNumberOfUsers();
 		test.changeUsername();
 		test.correctType();
+		test.checkLogging();
 	);	
 	
 functions

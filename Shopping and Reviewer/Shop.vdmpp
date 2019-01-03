@@ -11,6 +11,10 @@ instance variables
 	private name : String;
 	private registeredUsers : Users := {};
 	private registeredProducts : map User`String to Products := {|->}; 
+		
+	-- fará sentido que só esteja um user logado de cada vez?? visto que é um modelo deste género, parace-me que sim
+	-- desta forma, teria algo como
+	private loggedUser : User;
 	
 operations
 	------------------------------------------
@@ -115,10 +119,19 @@ operations
 			if user.getUsername() = inputUsername
 			then (
 				if user.checkCredentials(inputPassword)
-				then return true
+				then (
+					loggedUser := user;
+					return true
+				)
 				else return false
 			);
 		return false;
+	);
+	
+	public logout: () ==> ()
+	logout() ==
+	(
+		loggedUser.logOut();
 	);
 	
 	

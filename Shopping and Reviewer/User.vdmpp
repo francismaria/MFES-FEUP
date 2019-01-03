@@ -78,7 +78,7 @@ operations
 	(
 		username := newUsername;
 	)
-	pre newUsername <> ""
+	pre newUsername <> "" and loggedIn = true
 	post username = newUsername;
 	
 		
@@ -87,7 +87,7 @@ operations
 	(
 		password := newPassword;
 	)
-	pre newPassword <> ""
+	pre newPassword <> "" and loggedIn = true
 	post password = newPassword;
 		
 	public checkCredentials: String ==> bool
@@ -100,6 +100,14 @@ operations
 		);
 		return false;
 	);
+	
+	public logOut: () ==> ()
+	logOut() ==
+	(
+		loggedIn := false;
+	)
+	pre loggedIn = true
+	post loggedIn = false;
 		
 functions
 	--verificar se palavra-passe é segura
