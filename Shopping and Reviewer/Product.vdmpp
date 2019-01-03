@@ -116,12 +116,12 @@ operations
 	)
 	post quantity > 0;
 	
-	public decrementQuantity: () ==> ()
-	decrementQuantity() ==
+	public decrementQuantity: nat1 ==> ()
+	decrementQuantity(subtract) ==
 	(
-		quantity := quantity - 1;
+		quantity := subtract - 1;
 	)
-	pre quantity > 0
+	pre quantity > 0 and subtract <= quantity
 	post quantity >= 0;
 	
 	-- This operation updates the average rating of the product

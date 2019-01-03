@@ -85,14 +85,26 @@ operations
 	pre ID in set dom products
 	post ID not in set dom products;
 	
-	public sellProduct: nat1 ==> ()
-	sellProduct(productID) ==
+	--verificar a quantidade
+	public sellProduct: nat1 * nat1 ==> bool
+	sellProduct(productID, desiredQuantity) ==
 	(
 		dcl product : Product := products(productID);
-		products := products :-> {product};
+		
+		if product.getQuantity() = 1 and desiredQuantity = 1
+		then (
+			products := products :-> {product};
+			return true;
+		)
+		elseif product.getQuantity() >= desiredQuantity 
+		then (
+			product.decrementQuantity(desiredQuantity);
+			return true;
+		) 
+		else
+			return true;
 	)
-	pre productID in set dom products
-	post productID not in set dom products;
+	pre productID in set dom products and desiredQuantity >= 1;
 	
 functions
 -- TODO Define functiones here

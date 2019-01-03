@@ -96,7 +96,7 @@ operations
 		assert(prod.getQuantity() = 1);
 		prod.incrementQuantity();
 		assert(prod.getQuantity() = 2);
-		prod.decrementQuantity();
+		prod.decrementQuantity(1);
 		assert(prod.getQuantity() = 1);
 	);
 

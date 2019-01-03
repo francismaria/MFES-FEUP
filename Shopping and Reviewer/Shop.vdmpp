@@ -31,6 +31,12 @@ operations
 	-- ACCESSOR METHODS
 	------------------------------------------
 	
+	public getLoggedUser: () ==> User
+	getLoggedUser() ==
+	(
+		return loggedUser;
+	);
+	
 	public getRegisteredUsers: () ==> Users
 	getRegisteredUsers() ==
 	(
