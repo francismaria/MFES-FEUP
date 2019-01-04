@@ -119,7 +119,7 @@ operations
 	public decrementQuantity: nat1 ==> ()
 	decrementQuantity(subtract) ==
 	(
-		quantity := subtract - 1;
+		quantity := quantity - subtract;
 	)
 	pre quantity > 0 and subtract <= quantity
 	post quantity >= 0;
