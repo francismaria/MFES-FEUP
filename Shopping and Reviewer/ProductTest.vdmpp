@@ -100,6 +100,10 @@ operations
 		assert(prod.getQuantity() = 1);
 	);
 	
+	-------------------------------------------------------------
+	-- Tests: 
+	--		: if the total number of products is well updated
+	-------------------------------------------------------------
 	private numberOfProducts: () ==> ()
 	numberOfProducts() == 
 	(
@@ -122,6 +126,21 @@ operations
 		assert(prod.isEqual(prod2));
 	);
 	
+	-------------------------------------------------------------
+	-- Tests: 
+	--		: if the reviews are being well returned
+	-------------------------------------------------------------	
+	private getReviews: () ==> ()
+	getReviews() ==
+	(
+		dcl prod : Product;
+		prod := new Product("p1", "description1", 12.99);
+		numProds := numProds + 1;
+		
+		
+		assert(prod.getReviews() = {});
+	);
+	
 	--ENTRY POINT
 	public static main: () ==> ()
 	main() ==
@@ -135,6 +154,7 @@ operations
 		test.changeQuantity();
 		test.areEqual();
 		test.numberOfProducts();
+		test.getReviews();
 	);
 	
 functions
