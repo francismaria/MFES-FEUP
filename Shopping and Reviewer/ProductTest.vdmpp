@@ -136,8 +136,7 @@ operations
 		dcl prod : Product;
 		prod := new Product("p1", "description1", 12.99);
 		numProds := numProds + 1;
-		
-		
+	
 		assert(prod.getReviews() = {});
 	);
 	

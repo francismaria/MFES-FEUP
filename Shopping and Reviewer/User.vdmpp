@@ -3,11 +3,7 @@ class User
 
 types
 	public String = seq of char;
-	public Date :: year : nat1
-								 month : nat1
-								 day : nat1		
-	inv d == d.month <= 12 and d.year >= 0
-			and d.day < 31;
+	public Float = real;
 	
 	-- sets the type of user: the seller and the costumer
 	public static UserType = <SELLER> | <COSTUMER>;
@@ -20,10 +16,13 @@ instance variables
 	private username : String;
 	private password : String;
 	private loggedIn : bool;
+	private rating : Float := 0;
+	private reviews : set of Review := {};
 	
 	private static numberOfUsers : int := 0; 
 	
 	inv ID <= numberOfUsers and ID > 0;
+	inv rating >= 0 and rating <= 5;
 	
 operations
 	------------------------------------------
@@ -47,11 +46,27 @@ operations
 		
 	public getUserID: () ==> nat1
 	getUserID() == 
+	(
 		return ID;
+	);
 	
 	public getUsername: () ==> String
 	getUsername() == 
+	(
 		return username;
+	);
+		
+	public getRating: () ==> Float
+	getRating() ==
+	(
+		return rating;
+	);
+	
+	public getReviews: () ==> set of Review
+	getReviews() ==
+	(
+		return reviews;
+	);
 		
 	public isLoggedIn: () ==> bool
 	isLoggedIn() ==
@@ -81,7 +96,6 @@ operations
 	pre newUsername <> "" and loggedIn = true
 	post username = newUsername;
 	
-		
 	public setNewPassword: String ==> ()
 	setNewPassword(newPassword) ==
 	(
@@ -89,6 +103,14 @@ operations
 	)
 	pre newPassword <> "" and loggedIn = true
 	post password = newPassword;
+	
+	public addReview: Review ==> ()
+	addReview(userReview) ==
+	(
+		reviews := reviews union {userReview};
+		updateRating();
+	)
+	pre userReview.getAuthor() <> self;
 		
 	public checkCredentials: String ==> bool
 	checkCredentials(inputPassword) ==
@@ -108,9 +130,32 @@ operations
 	)
 	pre loggedIn = true
 	post loggedIn = false;
+	
+	
+		-- This operation updates the average rating of the product
+	private updateRating: () ==> ()
+	updateRating() ==
+	(
+		dcl allRatingsSum : nat := 0, numRatings : nat := 0;
+		for all r in set reviews do
+		(
+			allRatingsSum := allRatingsSum + r.getClassification();
+			numRatings := numRatings + 1;
+		);
+		rating := calculateRating(numRatings, allRatingsSum);
+	);
 		
 functions
-	--verificar se palavra-passe é segura
+	
+	--this function calculates the average product rating
+	private calculateRating: nat * nat -> Float
+	calculateRating(numReviews, reviewsRatings) ==
+	(
+		if numReviews = 0 then 0
+		else 
+			reviewsRatings / numReviews
+	);
+	
 traces
 
 end User

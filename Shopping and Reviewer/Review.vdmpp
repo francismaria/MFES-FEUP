@@ -28,20 +28,20 @@ operations
 	-- ACCESSOR METHODS 
 	------------------------------------------
 	
-	public getText: () ==> String
+	pure public getText: () ==> String
 	getText() ==
 	(
 		return text;
 	);
 	
-	public getClassification: () ==> nat1
+	pure public getClassification: () ==> nat1
 	getClassification() ==
 	(
 		return classification;
 	);
 	
 	
-	public getAuthor: () ==> User
+	pure public getAuthor: () ==> User
 	getAuthor() ==
 	(
 		return author;
