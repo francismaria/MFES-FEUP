@@ -99,6 +99,12 @@ operations
 		prod.decrementQuantity(1);
 		assert(prod.getQuantity() = 1);
 	);
+	
+	private numberOfProducts: () ==> ()
+	numberOfProducts() == 
+	(
+		assert(numProds = Product`getNumberOfProducts());
+	);
 
 	-------------------------------------------------------------
 	-- Tests: 
@@ -109,7 +115,9 @@ operations
 	(
 		dcl prod : Product, prod2 : Product;
 		prod := new Product("p1", "description1", 12.99);
+		numProds := numProds + 1;
 		prod2 := new Product("p1", "description1", 12.99);
+		numProds := numProds + 1;
 		
 		assert(prod.isEqual(prod2));
 	);
@@ -126,6 +134,7 @@ operations
 		test.changePrice();
 		test.changeQuantity();
 		test.areEqual();
+		test.numberOfProducts();
 	);
 	
 functions
