@@ -20,7 +20,12 @@ public class ShopInterface {
 	
 	private JPanel cardShowingPanel = new JPanel();
 	private JPanel initialPanel;
+	
+	//	Seller Panels
 	private JPanel sellerHomePanel;
+	private JPanel sellerAddNewProductPanel;
+	
+	// Costumer Panels
 	private JPanel costumerHomePanel;
 	
 	private static int FRAME_DIMENSION = 600;
@@ -36,6 +41,17 @@ public class ShopInterface {
 	private JLabel newPasswordLabel;
 	private JLabel lblRepeatPassword;
 	private JLabel welcomeLabel;
+	private JLabel newProdLabel;
+	private JLabel productDescrLabel;
+	private JLabel productNameLabel;
+	private JLabel productPriceLabel;
+	private JTextField prodNameField;
+	private JTextField prodDescrpField;
+	private JTextField prodPriceField;
+	
+	/*---------------------------------------------------
+	 * 				FILL INITIAL PANEL
+	 ---------------------------------------------------*/
 	
 	private void fillInitialPanel() {
 		initialPanel = new JPanel();
@@ -151,7 +167,11 @@ public class ShopInterface {
 		registerPanel.setVisible(true);
 	}
 
-	private void fillSellerHomePanel() {
+	/*---------------------------------------------------
+	 * 			   FILL SELLER HOME PANEL
+	 ---------------------------------------------------*/
+	
+	private void fillSellerHomePanel() {		
 		sellerHomePanel = new JPanel();
 		
 		sellerHomePanel.setLayout(null);
@@ -163,6 +183,11 @@ public class ShopInterface {
 		JButton logoutBtn = new JButton("Log Out");
 		logoutBtn.setBounds(470, 15, 100, 40);
 		sellerHomePanel.add(logoutBtn);
+		
+		JButton addNewProdBtn = new JButton("Add New Product");
+		addNewProdBtn.setBounds(420, 65, 150, 40);
+		sellerHomePanel.add(addNewProdBtn);
+		
 		
 		JLabel myProductsLabel = new JLabel("My Products");
 		myProductsLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
@@ -202,8 +227,8 @@ public class ShopInterface {
 		/*------------------------------------------------
 		 * 				ACTION LISTENERS
 		 *------------------------------------------------*/
+	
 		logoutBtn.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//LOGOUT!! 
@@ -211,8 +236,90 @@ public class ShopInterface {
 				cardLayout.show(cardShowingPanel, "CARD_INITIAL_PANEL");
 			}
 		});
+		
+		addNewProdBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//LOGOUT!! 
+				System.out.println("Add new Product");
+				cardLayout.show(cardShowingPanel, "CARD_SELLER_ADD_NEW_PROD_PANEL");
+			}
+		});
+		
 	}
-
+	
+	private void fillSellerAddNewProdPanel() {
+		sellerAddNewProductPanel = new JPanel();
+		sellerAddNewProductPanel.setLayout(null);
+		
+		JButton logoutBtn = new JButton("Log Out");
+		logoutBtn.setBounds(470, 15, 100, 40);
+		sellerAddNewProductPanel.add(logoutBtn);
+		
+		newProdLabel = new JLabel("Add New Product");
+		newProdLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		newProdLabel.setBounds(239, 78, 155, 25);
+		sellerAddNewProductPanel.add(newProdLabel);
+		
+		productDescrLabel = new JLabel("Product Description:");
+		productDescrLabel.setBounds(100, 256, 136, 25);
+		sellerAddNewProductPanel.add(productDescrLabel);
+		
+		productNameLabel = new JLabel("Product Name:");
+		productNameLabel.setBounds(100, 177, 100, 25);
+		sellerAddNewProductPanel.add(productNameLabel);
+		
+		productPriceLabel = new JLabel("Product Price:");
+		productPriceLabel.setBounds(100, 339, 100, 25);
+		sellerAddNewProductPanel.add(productPriceLabel);
+		
+		prodNameField = new JTextField();
+		prodNameField.setBounds(287, 176, 266, 26);
+		sellerAddNewProductPanel.add(prodNameField);
+		prodNameField.setColumns(10);
+		
+		prodDescrpField = new JTextField();
+		prodDescrpField.setColumns(10);
+		prodDescrpField.setBounds(287, 256, 266, 26);
+		sellerAddNewProductPanel.add(prodDescrpField);
+		
+		prodPriceField = new JTextField();
+		prodPriceField.setColumns(10);
+		prodPriceField.setBounds(287, 338, 266, 26);
+		sellerAddNewProductPanel.add(prodPriceField);
+		
+		JButton newProdBtn = new JButton("Add New Product");
+		newProdBtn.setBounds(239, 462, 143, 40);
+		sellerAddNewProductPanel.add(newProdBtn);
+		
+		/*------------------------------------------------
+		 * 				ACTION LISTENERS
+		 *------------------------------------------------*/
+		
+		logoutBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//LOGOUT!! 
+				System.out.println("USER LOGOUT");
+				cardLayout.show(cardShowingPanel, "CARD_INITIAL_PANEL");
+			}
+		});
+		
+		newProdBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//adicionar um novo produto aos do user! 
+				System.out.println("ADD NEW PRODUCT");
+				cardLayout.show(cardShowingPanel, "CARD_SELLER_HOME_PANEL");
+			}
+		});
+	}
+	
+	
+	
+	/*---------------------------------------------------
+	 * 			     FILL COSTUMER PANEL
+	 ---------------------------------------------------*/
 	private void fillCostumerHomePanel() {
 		costumerHomePanel = new JPanel();
 	}
@@ -228,12 +335,17 @@ public class ShopInterface {
 		
 		fillInitialPanel();
 		fillSellerHomePanel();
+		fillSellerAddNewProdPanel();
 		fillCostumerHomePanel();
 		
 		cardShowingPanel.add(initialPanel, "CARD_INITIAL_PANEL");
 		cardShowingPanel.add(sellerHomePanel, "CARD_SELLER_HOME_PANEL");
+		cardShowingPanel.add(sellerAddNewProductPanel, "CARD_SELLER_ADD_NEW_PROD_PANEL");
 		
 
+		
+
+		
 		
 		
 		
@@ -241,7 +353,6 @@ public class ShopInterface {
 		costumerHomePanel.setLayout(null);
 		
 		cardLayout.show(cardShowingPanel, "CARD_SELLER_HOME_PANEL");
-		
 		
 		frame.getContentPane().add(cardShowingPanel);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
