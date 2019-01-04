@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.FlowLayout;
 
 public class ShopInterface {
 	
@@ -24,6 +26,7 @@ public class ShopInterface {
 	//	Seller Panels
 	private JPanel sellerHomePanel;
 	private JPanel sellerAddNewProductPanel;
+	private JPanel sellerProductInfoPanel;
 	
 	// Costumer Panels
 	private JPanel costumerHomePanel;
@@ -48,6 +51,23 @@ public class ShopInterface {
 	private JTextField prodNameField;
 	private JTextField prodDescrpField;
 	private JTextField prodPriceField;
+	private JLabel prodInfoLabel;
+	private JLabel prodNameLabel;
+	private JLabel prodDescrpLabel;
+	private JLabel prodPriceLabel;
+	private JLabel prodQtyLabel;
+	private JLabel prodRatingLabel;
+	private JLabel prodReviewLabel;
+	
+	private ActionListener logoutAction = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//LOGOUT!! 
+			System.out.println("USER LOGOUT");
+			cardLayout.show(cardShowingPanel, "CARD_INITIAL_PANEL");
+		}
+	};
+	private JLabel buyProdLabel;
 	
 	/*---------------------------------------------------
 	 * 				FILL INITIAL PANEL
@@ -315,13 +335,122 @@ public class ShopInterface {
 		});
 	}
 	
+	private void fillSellerProductInfoPanel(){
+		sellerProductInfoPanel = new JPanel();
+		sellerProductInfoPanel.setLayout(null);
+		
+		JButton logoutBtn = new JButton("Log Out");
+		logoutBtn.setBounds(470, 15, 100, 40);
+		sellerProductInfoPanel.add(logoutBtn);
+		
+		prodInfoLabel = new JLabel("Product Information");
+		prodInfoLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		prodInfoLabel.setBounds(227, 83, 183, 26);
+		sellerProductInfoPanel.add(prodInfoLabel);
+		
+		prodNameLabel = new JLabel("Name:");
+		prodNameLabel.setBounds(99, 186, 61, 16);
+		sellerProductInfoPanel.add(prodNameLabel);
+		
+		prodDescrpLabel = new JLabel("Description:");
+		prodDescrpLabel.setBounds(99, 243, 87, 16);
+		sellerProductInfoPanel.add(prodDescrpLabel);
+		
+		prodPriceLabel = new JLabel("Price:");
+		prodPriceLabel.setBounds(99, 301, 61, 16);
+		sellerProductInfoPanel.add(prodPriceLabel);
+		
+		prodQtyLabel = new JLabel("Quantity:");
+		prodQtyLabel.setBounds(99, 366, 61, 16);
+		sellerProductInfoPanel.add(prodQtyLabel);
+		
+		prodRatingLabel = new JLabel("Rating:");
+		prodRatingLabel.setBounds(99, 428, 61, 16);
+		sellerProductInfoPanel.add(prodRatingLabel);
+		
+		prodReviewLabel = new JLabel("Reviews:");
+		prodReviewLabel.setBounds(99, 485, 61, 16);
+		sellerProductInfoPanel.add(prodReviewLabel);
+		
+		JScrollBar scrollBar = new JScrollBar();
+		scrollBar.setBounds(582, 6, 15, 566);
+		sellerProductInfoPanel.add(scrollBar);
+		
+		/*------------------------------------------------
+		 * 				ACTION LISTENERS
+		 *------------------------------------------------*/
+		
+		logoutBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//LOGOUT!! 
+				System.out.println("SELLER LOGOUT");
+				cardLayout.show(cardShowingPanel, "CARD_INITIAL_PANEL");
+			}
+		});
+	}
 	
+	private void addProductPanel(String panelName, int index) {
+		final int height = 76;
+		final int initialY = 160;
+		
+		JPanel prod1Panel = new JPanel();
+		prod1Panel.setBounds(24, initialY+(height*index), 546, height);
+		costumerHomePanel.add(prod1Panel);
+		prod1Panel.setLayout(null);
+		
+		JButton prod1Btn = new JButton("Product1");
+		prod1Btn.setBounds(0, 22, 100, 29);
+		prod1Panel.add(prod1Btn);
+		
+		JButton buyButton = new JButton("Buy");
+		buyButton.setBounds(423, 22, 117, 29);
+		prod1Panel.add(buyButton);
+	}
 	
 	/*---------------------------------------------------
 	 * 			     FILL COSTUMER PANEL
 	 ---------------------------------------------------*/
 	private void fillCostumerHomePanel() {
 		costumerHomePanel = new JPanel();
+		costumerHomePanel.setLayout(null);
+		
+		welcomeLabel = new JLabel("Welcome, ");
+		welcomeLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		welcomeLabel.setBounds(176, 37, 284, 27);
+		costumerHomePanel.add(welcomeLabel);
+		
+		JButton logoutBtn = new JButton("Log Out");
+		logoutBtn.setBounds(470, 15, 100, 40);
+		costumerHomePanel.add(logoutBtn);
+		
+		buyProdLabel = new JLabel("Buy a Product");
+		buyProdLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		buyProdLabel.setBounds(206, 97, 131, 27);
+		costumerHomePanel.add(buyProdLabel);
+		
+		int i;
+		
+		for(i = 0; i < 3; i++) {
+			String panelName = "prod" + Integer.toString(i) + "Panel";
+			addProductPanel(panelName, i+1);
+		}
+		
+		
+		
+		/*------------------------------------------------
+		 * 				ACTION LISTENERS
+		 *------------------------------------------------*/
+		
+		/*logoutBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//LOGOUT!! 
+				System.out.println("COSTUMER LOGOUT");
+				cardLayout.show(cardShowingPanel, "CARD_INITIAL_PANEL");
+			}
+		});*/
+		logoutBtn.addActionListener(logoutAction);
 	}
 
 	public ShopInterface() {
@@ -334,25 +463,30 @@ public class ShopInterface {
 		cardShowingPanel.setLayout(cardLayout);
 		
 		fillInitialPanel();
+		
 		fillSellerHomePanel();
 		fillSellerAddNewProdPanel();
+		fillSellerProductInfoPanel();
+		
 		fillCostumerHomePanel();
 		
+		
 		cardShowingPanel.add(initialPanel, "CARD_INITIAL_PANEL");
+		
+		// Seller Panels
 		cardShowingPanel.add(sellerHomePanel, "CARD_SELLER_HOME_PANEL");
 		cardShowingPanel.add(sellerAddNewProductPanel, "CARD_SELLER_ADD_NEW_PROD_PANEL");
+		cardShowingPanel.add(sellerProductInfoPanel, "CARD_SELLER_PROD_INFO_PANEL");
 		
-
-		
-
-		
-		
-		
-		
+		// Costumer Panels
 		cardShowingPanel.add(costumerHomePanel, "CARD_COSTUMER_HOME_PANEL");
-		costumerHomePanel.setLayout(null);
 		
-		cardLayout.show(cardShowingPanel, "CARD_SELLER_HOME_PANEL");
+
+		
+		
+		
+		
+		cardLayout.show(cardShowingPanel, "CARD_COSTUMER_HOME_PANEL");
 		
 		frame.getContentPane().add(cardShowingPanel);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
