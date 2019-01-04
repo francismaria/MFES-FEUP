@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
 
@@ -59,6 +60,8 @@ public class ShopInterface {
 	private JLabel prodRatingLabel;
 	private JLabel prodReviewLabel;
 	
+	private Box costumerBuyBox;
+	
 	private ActionListener logoutAction = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -68,6 +71,7 @@ public class ShopInterface {
 		}
 	};
 	private JLabel buyProdLabel;
+	private JScrollPane scrollPane;
 	
 	/*---------------------------------------------------
 	 * 				FILL INITIAL PANEL
@@ -394,18 +398,19 @@ public class ShopInterface {
 		final int height = 76;
 		final int initialY = 160;
 		
-		JPanel prod1Panel = new JPanel();
-		prod1Panel.setBounds(24, initialY+(height*index), 546, height);
-		costumerHomePanel.add(prod1Panel);
-		prod1Panel.setLayout(null);
+		JPanel prodPanel = new JPanel();
+		prodPanel.setBounds(24, initialY+(height*index), 546, height);
+		prodPanel.setPreferredSize(new Dimension(520, height));
+		costumerBuyBox.add(prodPanel);
+		prodPanel.setLayout(null);
 		
 		JButton prod1Btn = new JButton("Product1");
 		prod1Btn.setBounds(0, 22, 100, 29);
-		prod1Panel.add(prod1Btn);
+		prodPanel.add(prod1Btn);
 		
 		JButton buyButton = new JButton("Buy");
 		buyButton.setBounds(423, 22, 117, 29);
-		prod1Panel.add(buyButton);
+		prodPanel.add(buyButton);
 	}
 	
 	/*---------------------------------------------------
@@ -429,11 +434,19 @@ public class ShopInterface {
 		buyProdLabel.setBounds(206, 97, 131, 27);
 		costumerHomePanel.add(buyProdLabel);
 		
+		costumerBuyBox = new Box(BoxLayout.Y_AXIS);
+		
+		
+		scrollPane = new JScrollPane(costumerBuyBox);
+		scrollPane.setBounds(18, 149, 564, 401);
+		costumerHomePanel.add(scrollPane);
+		
 		int i;
 		
-		for(i = 0; i < 3; i++) {
+		for(i = 0; i < 10; i++) {
 			String panelName = "prod" + Integer.toString(i) + "Panel";
 			addProductPanel(panelName, i+1);
+			costumerBuyBox.revalidate();
 		}
 		
 		
@@ -480,6 +493,8 @@ public class ShopInterface {
 		
 		// Costumer Panels
 		cardShowingPanel.add(costumerHomePanel, "CARD_COSTUMER_HOME_PANEL");
+		
+
 		
 
 		
