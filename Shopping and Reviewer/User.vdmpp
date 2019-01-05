@@ -123,6 +123,14 @@ operations
 		return false;
 	);
 	
+	public logIn: () ==> ()
+	logIn() ==
+	(
+		loggedIn := true;
+	)
+	pre loggedIn = false
+	post loggedIn = true;
+	
 	public logOut: () ==> ()
 	logOut() ==
 	(
