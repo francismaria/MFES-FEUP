@@ -5,8 +5,10 @@ import javax.swing.*;
 import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Enumeration;
 import java.util.Iterator;
 
 import javax.swing.border.MatteBorder;
@@ -15,6 +17,7 @@ import org.overture.codegen.runtime.VDMSet;
 
 import model.Costumer;
 import model.Product;
+import model.Review;
 import model.Seller;
 import model.Shop;
 import model.User;
@@ -637,8 +640,41 @@ public class ShopUI {
 		prodInformationCostumerPanel.add(reviewBtn);
 		
 		JTextArea write = new JTextArea(20,60);
-		write.setBounds(30, 300, 540, 200);
+		write.setBounds(30, 300, 540, 150);
+		write.setVisible(false);
 		prodInformationCostumerPanel.add(write);
+		
+		JButton submitReviewBtn = new JButton("Submit Review");
+		submitReviewBtn.setBounds(200, 500, 150, 40);
+		submitReviewBtn.setVisible(false);
+		prodInformationCostumerPanel.add(submitReviewBtn);
+		
+		JRadioButton oneStar = new JRadioButton("1");
+		oneStar.setBounds(70, 460, 150, 40);
+		JRadioButton twoStar = new JRadioButton("2");
+		twoStar.setBounds(170, 460, 70, 40);
+		JRadioButton threeStar = new JRadioButton("3");
+		threeStar.setBounds(290, 460, 70, 40);
+		JRadioButton fourStar = new JRadioButton("4");
+		fourStar.setBounds(400, 460, 70, 40);
+		JRadioButton fiveStar = new JRadioButton("5");
+		fiveStar.setBounds(500, 460, 70, 40);
+		
+		oneStar.setVisible(false); twoStar.setVisible(false);
+		threeStar.setVisible(false); fourStar.setVisible(false);
+		fiveStar.setVisible(false);
+		
+		ButtonGroup group = new ButtonGroup();
+		group.add(oneStar);
+		prodInformationCostumerPanel.add(oneStar);
+		group.add(twoStar);
+		prodInformationCostumerPanel.add(twoStar);
+		group.add(threeStar);
+		prodInformationCostumerPanel.add(threeStar);
+		group.add(fourStar);
+		prodInformationCostumerPanel.add(fourStar);
+		group.add(fiveStar);
+		prodInformationCostumerPanel.add(fiveStar);
 		
 		prodInformationCostumerPanel.revalidate();
 		prodInformationCostumerPanel.repaint();
@@ -654,9 +690,44 @@ public class ShopUI {
 			}
 		});
 		
+		reviewBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				write.setVisible(true);
+				oneStar.setVisible(true); twoStar.setVisible(true);
+				threeStar.setVisible(true); fourStar.setVisible(true);
+				fiveStar.setVisible(true);
+				submitReviewBtn.setVisible(true);
+			}
+		});
+		
 		backButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(cardShowingPanel, "CARD_COSTUMER_HOME_PANEL");
+			}
+		});
+		
+		submitReviewBtn.addActionListener(new ActionListener() {
+			private String getSelectedButtonText() {
+			    for (Enumeration<AbstractButton> buttons = group.getElements(); buttons.hasMoreElements();) {
+			        AbstractButton button = buttons.nextElement();
+			        if (button.isSelected()) {
+			                return button.getText();
+			        }
+			    }
+			    return null;
+			}
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String value = getSelectedButtonText();
+				if(value == null) return;
+				int rate = Integer.parseInt(value);
+				
+				Review userReview = new Review(write.getText(), rate, shop.getLoggedUser());
+				prod.addReview(userReview);
+				fillCostumerHomePanel();
 				cardLayout.show(cardShowingPanel, "CARD_COSTUMER_HOME_PANEL");
 			}
 		});
