@@ -615,18 +615,18 @@ public class ShopUI {
 		
 		JLabel rating = new JLabel("Rating: " + prod.getRating().toString() + " (" + prod.getReviews().size() + ")");
 		rating.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		rating.setBounds(30, 180, 100, 27);
+		rating.setBounds(30, 190, 120, 27);
 		prodInformationCostumerPanel.add(rating);
 		
 		JLabel price = new JLabel("Price: " + Double.toString(prod.getPrice().doubleValue()));
 		price.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		price.setBounds(140, 180, 50, 27);
+		price.setBounds(200, 190, 120, 27);
 		prodInformationCostumerPanel.add(price);
 		
 		JLabel stock = new JLabel("Stock: " + Integer.toString(prod.getQuantity().intValue()));
-		price.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		price.setBounds(250, 180, 100, 27);
-		prodInformationCostumerPanel.add(price);
+		stock.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+		stock.setBounds(350, 190, 120, 27);
+		prodInformationCostumerPanel.add(stock);
 		
 		JButton buyBtn = new JButton("Buy Product");
 		buyBtn.setBounds(210, 230, 100, 40);
@@ -635,6 +635,10 @@ public class ShopUI {
 		JButton reviewBtn = new JButton("Add Review");
 		reviewBtn.setBounds(310, 230, 100, 40);
 		prodInformationCostumerPanel.add(reviewBtn);
+		
+		JTextArea write = new JTextArea(20,60);
+		write.setBounds(30, 300, 540, 200);
+		prodInformationCostumerPanel.add(write);
 		
 		prodInformationCostumerPanel.revalidate();
 		prodInformationCostumerPanel.repaint();
