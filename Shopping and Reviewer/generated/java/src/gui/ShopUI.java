@@ -43,6 +43,7 @@ public class ShopUI {
 	
 	// Costumer Panels
 	private JPanel costumerHomePanel = new JPanel();
+	private JPanel prodInformationCostumerPanel = new JPanel();
 	
 	private static int FRAME_DIMENSION = 600;
 	private JLabel shopDescrpLabel;
@@ -562,8 +563,7 @@ public class ShopUI {
 		logoutBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//LOGOUT!! 
-				System.out.println("SELLER LOGOUT");
+				shop.logout();
 				cardLayout.show(cardShowingPanel, "CARD_INITIAL_PANEL");
 			}
 		});
@@ -584,6 +584,80 @@ public class ShopUI {
 	 * 										COSTUMER
 	 * -----------------------------------------------------------------------------------------------
 	 */
+	
+	private void fillProductInformationPanel(Product prod) {
+		prodInformationCostumerPanel.setLayout(null);
+		prodInformationCostumerPanel.removeAll();
+		
+		JButton logoutBtn = new JButton("Log Out");
+		logoutBtn.setBounds(470, 15, 100, 40);
+		prodInformationCostumerPanel.add(logoutBtn);
+		
+		JButton backButton = new JButton();
+		backButton.setBounds(20, 15, 70, 70);
+		backButton.setIcon(backIcon);
+		prodInformationCostumerPanel.add(backButton);
+		
+		JLabel titleLabel = new JLabel("Product Information");
+		titleLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		titleLabel.setBounds(200, 37, 284, 27);
+		prodInformationCostumerPanel.add(titleLabel);
+		
+		JLabel name = new JLabel("Name: " + prod.getName());
+		name.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+		name.setBounds(30, 80, 284, 27);
+		prodInformationCostumerPanel.add(name);
+		
+		JLabel description = new JLabel("Description: " + prod.getDescription());
+		description.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+		description.setBounds(30, 130, 284, 27);
+		prodInformationCostumerPanel.add(description);
+		
+		JLabel rating = new JLabel("Rating: " + prod.getRating().toString() + " (" + prod.getReviews().size() + ")");
+		rating.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+		rating.setBounds(30, 180, 100, 27);
+		prodInformationCostumerPanel.add(rating);
+		
+		JLabel price = new JLabel("Price: " + Double.toString(prod.getPrice().doubleValue()));
+		price.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+		price.setBounds(140, 180, 50, 27);
+		prodInformationCostumerPanel.add(price);
+		
+		JLabel stock = new JLabel("Stock: " + Integer.toString(prod.getQuantity().intValue()));
+		price.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+		price.setBounds(250, 180, 100, 27);
+		prodInformationCostumerPanel.add(price);
+		
+		JButton buyBtn = new JButton("Buy Product");
+		buyBtn.setBounds(210, 230, 100, 40);
+		prodInformationCostumerPanel.add(buyBtn);
+		
+		JButton reviewBtn = new JButton("Add Review");
+		reviewBtn.setBounds(310, 230, 100, 40);
+		prodInformationCostumerPanel.add(reviewBtn);
+		
+		prodInformationCostumerPanel.revalidate();
+		prodInformationCostumerPanel.repaint();
+		
+		/*------------------------------------------------
+		 * 				ACTION LISTENERS
+		 *------------------------------------------------*/
+		logoutBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				shop.logout();
+				cardLayout.show(cardShowingPanel, "CARD_INITIAL_PANEL");
+			}
+		});
+		
+		backButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(cardShowingPanel, "CARD_COSTUMER_HOME_PANEL");
+			}
+		});
+	}
+	
 	
 	private void addProductPanel(int index, Product prod) {
 		final int height = 76;
@@ -618,8 +692,8 @@ public class ShopUI {
 		prodBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//fillCostumerHomePanel();
-				cardLayout.show(cardShowingPanel, "CARD_SELLER_PROD_INFO_PANEL");
+				fillProductInformationPanel(prod);
+				cardLayout.show(cardShowingPanel, "CARD_COSTUMER_PROD_INFO_PANEL");
 			}
 		});
 		
@@ -768,12 +842,7 @@ public class ShopUI {
 		
 		// Costumer Panels
 		cardShowingPanel.add(costumerHomePanel, "CARD_COSTUMER_HOME_PANEL");
-		
-
-		
-
-		
-		
+		cardShowingPanel.add(prodInformationCostumerPanel, "CARD_COSTUMER_PROD_INFO_PANEL");
 		
 		
 		cardLayout.show(cardShowingPanel, "CARD_INITIAL_PANEL");
