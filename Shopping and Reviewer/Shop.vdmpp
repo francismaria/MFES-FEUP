@@ -12,8 +12,7 @@ instance variables
 	private registeredUsers : Users := {};
 	private registeredProducts : map User`String to Products := {|->}; 
 		
-	-- fará sentido que só esteja um user logado de cada vez?? visto que é um modelo deste género, parace-me que sim
-	-- desta forma, teria algo como
+	--variable to keep track of the current logged user
 	private loggedUser : User;
 	
 operations
@@ -94,7 +93,7 @@ operations
 
 
 	-- Updates all the products that exist in the shop
-	-- It keeps all products listed with the respective association to the product's seller.
+	-- It keeps all products listed with the respective association to the product's seller by it's username.
 	public updateProducts: () ==> ()
 	updateProducts() ==
 	(
@@ -118,6 +117,7 @@ operations
 	-- AUTHORIZATION METHODS
 	------------------------------------------
 	
+	-- if the entered credentials are correct then the user "logs in"
 	public login: String * String ==> bool
 	login(inputUsername, inputPassword) ==
 	(
@@ -135,12 +135,14 @@ operations
 		return false;
 	);
 	
+	-- logs current user out
 	public logout: () ==> ()
 	logout() ==
 	(
 		loggedUser.logOut();
 	);
 	
+	-- registers a new user in the shop
 	public register: String * String * User`UserType ==> ()
 	register(newUsername, newPassword, type) ==
 	(

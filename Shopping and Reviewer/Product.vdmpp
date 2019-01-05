@@ -95,6 +95,7 @@ operations
 	-- MODIFIER METHODS
 	------------------------------------------
 	
+	-- adds a review to the products
 	public addReview: Review ==> ()
 	addReview(userReview) ==
 	(
@@ -102,6 +103,7 @@ operations
 		updateRating();
 	);
 	
+	-- changes product price
 	public changePrice: Float ==> ()
 	changePrice(newPrice) ==
 	(
@@ -109,6 +111,7 @@ operations
 	)
 	pre price <> newPrice;
 
+	-- increments the user quantity
 	public incrementQuantity: () ==> ()
 	incrementQuantity() ==
 	(
@@ -116,6 +119,7 @@ operations
 	)
 	post quantity > 0;
 	
+	-- decreases product quantity
 	public decrementQuantity: nat1 ==> ()
 	decrementQuantity(subtract) ==
 	(
@@ -140,7 +144,7 @@ operations
 	------------------------------------------
 	-- COMPARISION METHODS
 	------------------------------------------
-	
+	-- checks if two products are the same
 	public isEqual: Product ==> bool
 	isEqual(newProduct) ==
 	(

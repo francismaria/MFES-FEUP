@@ -39,7 +39,7 @@ operations
 	)
 	pre id in set dom products;
 	
-	--returns the range of products in the map
+	-- returns the range of products in the map
 	public getAllProducts: () ==> Products
 	getAllProducts() ==
 	(
@@ -77,6 +77,7 @@ operations
 		)
 	);
 	
+	-- removes a product from the seller inventory given the product ID in the inventory
 	public removeProduct: nat1 ==> ()
 	removeProduct(ID) ==
 	(
@@ -85,7 +86,8 @@ operations
 	pre ID in set dom products
 	post ID not in set dom products;
 	
-	--verificar a quantidade
+	-- sells a product (decreases its quantity)
+	-- if deired quantity is bigger than the stock then it does not sell the product.
 	public sellProduct: nat1 * nat1 ==> bool
 	sellProduct(productID, desiredQuantity) ==
 	(
@@ -102,7 +104,7 @@ operations
 			return true;
 		) 
 		else
-			return true;
+			return false;
 	)
 	pre productID in set dom products and desiredQuantity >= 1;
 	
