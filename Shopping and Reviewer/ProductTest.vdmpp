@@ -156,6 +156,34 @@ operations
 		test.getReviews();
 	);
 	
+	----------------------------------------------------------------
+	-- | ENTRY POINTS FOR INVALID INPUTS (TO RUN ONE AT A TIME) | --
+	----------------------------------------------------------------
+	
+	-------------------------------------------------------------
+	-- Error: 
+	--		: violates pre condition where a product price cannot
+	--	be updated with an equal price.
+	-------------------------------------------------------------	
+	public static samePriceUpdate: () ==> ()
+	samePriceUpdate() ==
+	(
+		dcl prod : Product := new Product("p1", "description1", 12.99);
+		prod.changePrice(12.99);
+	);
+	
+	-------------------------------------------------------------
+	-- Error: 
+	--		: violates pre condition where the desired quantity to 
+	--	subtract is bigger than the existing quantity
+	-------------------------------------------------------------
+	public static decrementQuantity: () ==> ()
+	decrementQuantity() ==
+	(
+		dcl prod : Product := new Product("p1", "description1", 12.99);
+		prod.decrementQuantity(4);
+	);
+	
 functions
 -- TODO Define functiones here
 traces
