@@ -6,6 +6,9 @@ instance variables
 	-- Shop instance
 	private shop : Shop;
 	
+	
+	private prodsRegistered : nat := 0;
+	
 operations
 
 	-------------------------------------------------------------
@@ -60,6 +63,26 @@ operations
 		assertEqual(shop.login("Seller1", "pswd1"), true);
 		assert(shop.getLoggedUser().getUsername() = "Seller1");
 		shop.logout();
+		assertEqual(shop.login("Seller2", "pswd2"), true);
+		assert(shop.getLoggedUser().getUsername() = "Seller2");
+	);
+	
+	-------------------------------------------------------------
+	-- Tests:
+	--		: the correct number of products registererd in the 
+	--	shop
+	-------------------------------------------------------------
+	private getNumberOfProducts: () ==> ()
+	getNumberOfProducts() ==
+	(
+		dcl prod : Product := new Product("P1", "Great product! Brand new", 15.99), seller : Seller;
+		assertEqual(shop.getNumberOfProducts(), (Product`getNumberOfProducts()-prodsRegistered));
+		assertEqual(shop.login("Seller1", "pswd1"), true);
+		seller := shop.getLoggedUser();
+		seller.addNewProduct(prod);
+		prodsRegistered := prodsRegistered + 1;
+		shop.updateProducts();
+		assertEqual(shop.getNumberOfProducts(), Product`getNumberOfProducts());
 	);
 	
 	-- Entry point
@@ -72,6 +95,7 @@ operations
 		test.getNumberOfSellers();
 		test.getNumberOfCostumers();
 		test.userLogging();
+		test.getNumberOfProducts();
 	);
 	
 functions
