@@ -208,6 +208,38 @@ operations
 		test.sellerTestExistingProductOperations();
 	);	
 	
+	----------------------------------------------------------------
+	-- | ENTRY POINTS FOR INVALID INPUTS (TO RUN ONE AT A TIME) | --
+	----------------------------------------------------------------
+	
+		-------------------------------------------------------------
+	-- Error: 
+	--		: violates pre condition where a user has to be given
+	--	a username and a password upon its creation.
+	--	P.S.: one of the statements below can be uncommented to
+	-- 	get the desired result.
+	-------------------------------------------------------------	
+	public static constructUserNoUsermame: () ==> ()
+	constructUserNoUsermame() ==
+	(
+		dcl seller : Seller := new Seller("", "password1");
+		return;
+		--dcl seller : Seller := new Seller("TestUsername", "");
+		--dcl seller : Seller := new Seller("TestUsername", "");
+	);
+	
+	-------------------------------------------------------------
+	-- Error: 
+	--		: violates pre condition where a user has to be logged
+	--	in in order to change its password/username
+	-------------------------------------------------------------	
+	public static unloggedPasswordChange: () ==> ()
+	unloggedPasswordChange() ==
+	(
+		dcl seller : Seller := new Seller("TestSeller", "password1");
+		seller.setNewPassword("newPassword");
+	);
+	
 functions
 -- TODO Define functiones here
 traces
