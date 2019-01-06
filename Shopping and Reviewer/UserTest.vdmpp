@@ -98,13 +98,13 @@ operations
 	-------------------------------------------------------------
 	-- Tests:
 	--		: the successful addition of a new product to a
-	--	seller's inventory
-	--		: the quantity change of a product
-	--		: the selling of a product
-	--		: the removal of a product
+	--	seller's inventory.
+	--		: the quantity change of a product.
+	--		: the selling of a product.
+	--		: the removal of a product.
 	-------------------------------------------------------------
-	private sellerTestProductOperations: () ==> ()
-	sellerTestProductOperations() ==
+	private sellerTestNewProductOperations: () ==> ()
+	sellerTestNewProductOperations() ==
 	(
 		dcl seller : Seller, prod : Product;
 		seller := new Seller("TestSeller", "password1");
@@ -118,6 +118,32 @@ operations
 		assert(seller.sellProduct(1,1) = true);
 		assertEqual(seller.getProduct(1).getQuantity(), 1);
 		seller.removeProduct(1);
+		assert(seller.getAllProducts() = {});
+	);
+	
+	-------------------------------------------------------------
+	-- Tests:
+	--		: if the addition of an already exisiting product 
+	--	increments its quantity instead of adding an equal 
+	--	product.
+	--		: if the selling of an existing product with only one 
+	--	instance in stock removes the product from the 
+	-- 	seller's inventory.
+	-------------------------------------------------------------
+	private sellerTestExistingProductOperations: () ==> ()
+	sellerTestExistingProductOperations() ==
+	(
+		dcl seller : Seller, prod : Product;
+		seller := new Seller("TestSeller", "password1");
+		numUsers := numUsers + 1;
+		prod := new Product("P1", "Great!", 15.99);
+		ProductTest`numProds := ProductTest`numProds + 1;
+		
+		seller.addNewProduct(prod);
+		seller.addNewProduct(prod);
+		assertEqual(seller.getProduct(1).getQuantity(), 2);
+		assert(seller.sellProduct(1,1) = true); 
+		assertEqual(seller.sellProduct(1,1), true);
 		assert(seller.getAllProducts() = {});
 	);
 	
@@ -150,7 +176,8 @@ operations
 		test.correctType();
 		test.checkLogging();
 		--Seller
-		test.sellerTestProductOperations();
+		test.sellerTestNewProductOperations();
+		test.sellerTestExistingProductOperations();
 	);	
 	
 functions
