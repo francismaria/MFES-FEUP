@@ -1,16 +1,35 @@
-class ShopTest
+class ShopTest is subclass of MyTest
 types
 values
 instance variables
+	
+	-- Shop instance
+	private shop : Shop;
+	
 operations
 
+	-------------------------------------------------------------
+	-- Tests:
+	--		: the successful creation of a shop.
+	-------------------------------------------------------------
+	private createShop: () ==> ()
+	createShop() ==
+	(
+		shop := new Shop("Loja Testes");
+		assertEqual(shop.getRegisteredUsers(),{});
+		assertEqual(shop.getRegisteredProducts(),{|->});
+	);
+	
 	-- Entry point
 	public static main: () ==> ()
 	main() ==
 	(
-	
+		dcl test : ShopTest := new ShopTest();
+		
+		test.createShop();
 		
 	);
+	
 functions
 -- TODO Define functiones here
 traces
