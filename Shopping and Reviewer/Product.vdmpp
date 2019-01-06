@@ -40,7 +40,7 @@ operations
 	pre newName <> "" and newDescription <> "" and newPrice >= 0;
 
 	------------------------------------------
-	-- ACCESSOR METHODS 
+	-- ACCESSOR OPERATIONS 
 	------------------------------------------
 	
 	public getID: () ==> nat1
@@ -92,7 +92,7 @@ operations
 	);
 	
 	------------------------------------------
-	-- MODIFIER METHODS
+	-- MODIFIER OPERATIONS
 	------------------------------------------
 	
 	-- adds a review to the products
@@ -142,7 +142,7 @@ operations
 	);
 	
 	------------------------------------------
-	-- COMPARISION METHODS
+	-- COMPARISION OPERATIONS
 	------------------------------------------
 	-- checks if two products are the same
 	public isEqual: Product ==> bool

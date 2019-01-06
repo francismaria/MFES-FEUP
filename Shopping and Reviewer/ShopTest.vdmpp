@@ -6,9 +6,6 @@ instance variables
 	-- Shop instance
 	private shop : Shop;
 	
-	
-	private prodsRegistered : nat := 0;
-	
 operations
 
 	-------------------------------------------------------------
@@ -76,12 +73,12 @@ operations
 	getNumberOfProducts() ==
 	(
 		dcl prod : Product := new Product("P1", "Great product! Brand new", 15.99), seller : Seller;
-		assertEqual(shop.getNumberOfProducts(), (Product`getNumberOfProducts()-prodsRegistered));
+		assertEqual(shop.getNumberOfProducts(), Product`getNumberOfProducts());
 		assertEqual(shop.login("Seller1", "pswd1"), true);
 		seller := shop.getLoggedUser();
 		seller.addNewProduct(prod);
-		prodsRegistered := prodsRegistered + 1;
 		shop.updateProducts();
+		seller.addNewProduct(prod);
 		assertEqual(shop.getNumberOfProducts(), Product`getNumberOfProducts());
 	);
 	

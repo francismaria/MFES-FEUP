@@ -25,22 +25,23 @@ operations
 	pre reviewClassification > 0 and reviewClassification <= 5;
 	
 	------------------------------------------
-	-- ACCESSOR METHODS 
+	-- ACCESSOR OPERATIONS 
 	------------------------------------------
-	
+	-- gets the review text
 	pure public getText: () ==> String
 	getText() ==
 	(
 		return text;
 	);
 	
+	-- gets the rating of the review
 	pure public getClassification: () ==> nat1
 	getClassification() ==
 	(
 		return classification;
 	);
 	
-	
+	-- gets the user who wrote the review
 	pure public getAuthor: () ==> User
 	getAuthor() ==
 	(

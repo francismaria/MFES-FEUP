@@ -10,15 +10,13 @@ operations
 	------------------------------------------
 	-- CONSTRUCTOR
 	------------------------------------------
-	
 	public Costumer : String * String ==> Costumer
 	Costumer(usernameExt, passwordExt) == 
 	(
 		User`User(usernameExt, passwordExt);
 	);
-
-	-- writtenReviews
 	
+	-- gets the type of the user
 	public getType: () ==> UserType
 	getType() ==
 	(

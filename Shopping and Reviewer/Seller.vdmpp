@@ -28,7 +28,7 @@ operations
 	);
 	
 	------------------------------------------
-	-- ACCESSOR METHODS 
+	-- ACCESSOR OPERATIONS 
 	------------------------------------------
 
 	-- Get the product by its ID in the inventory.
@@ -53,10 +53,10 @@ operations
 	);
 	
 	------------------------------------------
-	-- MODIFIER METHODS
+	-- MODIFIER OPERATIONS
 	------------------------------------------
 	
-	-- This function adds a new product to the seller's inventory.
+	-- This operation adds a new product to the seller's inventory.
 	-- If the product already exists in the inventory then it just increments its quantity.
 	-- Otherwise, it adds the new product to the inventory.
 	public addNewProduct: Product ==> ()
@@ -87,7 +87,7 @@ operations
 	post ID not in set dom products;
 	
 	-- sells a product (decreases its quantity)
-	-- if deired quantity is bigger than the stock then it does not sell the product.
+	-- if the desired quantity is bigger than the stock then it does not sell the product.
 	public sellProduct: nat1 * nat1 ==> bool
 	sellProduct(productID, desiredQuantity) ==
 	(

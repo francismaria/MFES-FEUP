@@ -27,7 +27,7 @@ operations
 	);
 	
 	------------------------------------------
-	-- ACCESSOR METHODS
+	-- ACCESSOR OPERATIONS
 	------------------------------------------
 	
 	public getLoggedUser: () ==> User
@@ -80,7 +80,7 @@ operations
 	);
 	
 	------------------------------------------
-	-- MODIFIER METHODS
+	-- MODIFIER OPERATIONS
 	------------------------------------------
 	
 	public addNewUser: User ==> ()
@@ -114,7 +114,7 @@ operations
 	);
 	
 	------------------------------------------
-	-- AUTHORIZATION METHODS
+	-- AUTHORIZATION OPERATIONS
 	------------------------------------------
 	
 	-- if the entered credentials are correct then the user "logs in"

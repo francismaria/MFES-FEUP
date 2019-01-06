@@ -41,7 +41,7 @@ operations
 		pre usernameExt <> "" and passwordExt <> "";
 		
 	------------------------------------------
-	-- ACCESSOR METHODS
+	-- ACCESSOR OPERATIONS
 	------------------------------------------
 		
 	public getUserID: () ==> nat1
@@ -85,9 +85,9 @@ operations
 	);
 	
 	------------------------------------------
-	-- MODIFIER METHODS
+	-- MODIFIER OPERATIONS
 	------------------------------------------
-	
+	-- changes the user's username
 	public setNewUsername: String ==> ()
 	setNewUsername(newUsername) ==
 	(
@@ -96,6 +96,7 @@ operations
 	pre newUsername <> "" and loggedIn = true
 	post username = newUsername;
 	
+	-- changes the user's password
 	public setNewPassword: String ==> ()
 	setNewPassword(newPassword) ==
 	(
@@ -104,6 +105,7 @@ operations
 	pre newPassword <> "" and loggedIn = true
 	post password = newPassword;
 	
+	-- adds a review to the user
 	public addReview: Review ==> ()
 	addReview(userReview) ==
 	(
@@ -112,6 +114,8 @@ operations
 	)
 	pre userReview.getAuthor() <> self;
 		
+	-- checks if the credentials are correct:
+	-- if true the user automatically logs in
 	public checkCredentials: String ==> bool
 	checkCredentials(inputPassword) ==
 	( 
@@ -123,6 +127,7 @@ operations
 		return false;
 	);
 	
+	-- log in operation
 	public logIn: () ==> ()
 	logIn() ==
 	(
@@ -131,6 +136,7 @@ operations
 	pre loggedIn = false
 	post loggedIn = true;
 	
+	-- log out operation
 	public logOut: () ==> ()
 	logOut() ==
 	(
@@ -139,7 +145,8 @@ operations
 	pre loggedIn = true
 	post loggedIn = false;
 	
-		-- This operation updates the average rating of the product
+	-- This operation updates the average rating of the user
+	-- taking in account all the ratings it had so far
 	private updateRating: () ==> ()
 	updateRating() ==
 	(
