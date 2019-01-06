@@ -287,13 +287,26 @@ public class ShopUI {
 		prod1.setBounds(15, 15, 129, 70);
 		prodPanel.add(prod1);
 		
-		JLabel rating = new JLabel(Double.toString(prod.getRating().doubleValue()));
-		rating.setBounds(150, 25, 50, 16);
+		JLabel ratinglabel = new JLabel("Rating:");
+		ratinglabel.setBounds(160, 20, 50, 16);
+		prodPanel.add(ratinglabel);
+		JLabel rating = new JLabel(Double.toString(prod.getRating().doubleValue()) + " (" + prod.getReviews().size() + ")");
+		rating.setBounds(160, 45, 50, 16);
 		prodPanel.add(rating);
 		
+		JLabel quantityLabel = new JLabel("Quantity:");
+		quantityLabel.setBounds(230, 20, 70, 16);
+		prodPanel.add(quantityLabel);
 		JLabel addPlus = new JLabel(prod.getQuantity().toString());
-		addPlus.setBounds(220, 25, 50, 16);
+		addPlus.setBounds(255, 45, 70, 16);
 		prodPanel.add(addPlus);
+		
+		JLabel priceLabel = new JLabel("Price:");
+		priceLabel.setBounds(320, 20, 50, 16);
+		prodPanel.add(priceLabel);
+		JLabel price = new JLabel(Double.toString(prod.getPrice().doubleValue()));
+		price.setBounds(320, 45, 50, 16);
+		prodPanel.add(price);
 		
 		JButton removeProd1 = new JButton();
 		removeProd1.setBounds(380, 15, 70, 70);
@@ -634,6 +647,13 @@ public class ShopUI {
 		JButton buyBtn = new JButton("Buy Product");
 		buyBtn.setBounds(210, 230, 100, 40);
 		prodInformationCostumerPanel.add(buyBtn);
+		if(prod.getQuantity().intValue() == 0) {
+			buyBtn.setVisible(false);
+			JLabel soldOut = new JLabel("SOLDOUT");
+			soldOut.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+			soldOut.setBounds(210, 230, 100, 40);
+			prodInformationCostumerPanel.add(soldOut);
+		}
 		
 		JButton reviewBtn = new JButton("Add Review");
 		reviewBtn.setBounds(310, 230, 100, 40);
@@ -704,6 +724,16 @@ public class ShopUI {
 		backButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				fillCostumerHomePanel();
+				cardLayout.show(cardShowingPanel, "CARD_COSTUMER_HOME_PANEL");
+			}
+		});
+		
+		buyBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				prod.decrementQuantity(1);
+				fillCostumerHomePanel();
 				cardLayout.show(cardShowingPanel, "CARD_COSTUMER_HOME_PANEL");
 			}
 		});
@@ -734,7 +764,7 @@ public class ShopUI {
 	}
 	
 	
-	private void addProductPanel(int index, Product prod) {
+	private void addProductPanel(int index, Product prod, String sellerName) {
 		final int height = 76;
 		final int initialY = 160;
 		
@@ -748,17 +778,37 @@ public class ShopUI {
 		prodBtn.setBounds(0, 22, 100, 29);
 		prodPanel.add(prodBtn);
 		
-		JLabel rating = new JLabel(Double.toString(prod.getRating().doubleValue()));
-		rating.setBounds(120, 22, 70, 30);
+		JLabel ratingLabel = new JLabel("Rating:");
+		ratingLabel.setBounds(120, 10, 70, 15);
+		prodPanel.add(ratingLabel);
+		JLabel rating = new JLabel(Double.toString(prod.getRating().doubleValue()) + " (" + prod.getReviews().size() + ")");
+		rating.setBounds(125, 25, 70, 30);
 		prodPanel.add(rating);
 		
+		JLabel priceLabel = new JLabel("Price:");
+		priceLabel.setBounds(220, 10, 70, 15);
+		prodPanel.add(priceLabel);
 		JLabel price = new JLabel(Double.toString(prod.getPrice().doubleValue()));
-		price.setBounds(220, 22, 70, 30);
+		price.setBounds(220, 25, 70, 30);
 		prodPanel.add(price);
+		
+		JLabel sellerLabel = new JLabel("Seller:");
+		sellerLabel.setBounds(300, 10, 70, 15);
+		prodPanel.add(sellerLabel);
+		JLabel seller = new JLabel(sellerName);
+		seller.setBounds(300, 25, 70, 30);
+		prodPanel.add(seller);
 		
 		JButton buyButton = new JButton("Buy");
 		buyButton.setBounds(423, 22, 117, 29);
 		prodPanel.add(buyButton);
+		if(prod.getQuantity().intValue() == 0) {
+			buyButton.setVisible(false);
+			JLabel soldOut = new JLabel("SOLDOUT");
+			soldOut.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
+			soldOut.setBounds(423, 22, 117, 29);
+			prodPanel.add(soldOut);
+		}
 		
 		/*------------------------------------------------
 		 * 				ACTION LISTENERS
@@ -789,7 +839,7 @@ public class ShopUI {
 		costumerHomePanel.setLayout(null);
 		costumerHomePanel.removeAll();
 		
-		welcomeLabel = new JLabel("Welcome, ");
+		welcomeLabel = new JLabel("Welcome, "+ shop.getLoggedUser().getUsername());
 		welcomeLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 		welcomeLabel.setBounds(176, 37, 284, 27);
 		costumerHomePanel.add(welcomeLabel);
@@ -826,7 +876,7 @@ public class ShopUI {
 				
 				while(prodsIt.hasNext()) {
 					Product prod = (Product) prodsIt.next();
-					addProductPanel(i, prod);
+					addProductPanel(i, prod, user.getUsername());
 					costumerBuyBox.revalidate();
 					costumerBuyBox.repaint();
 					i++;
@@ -896,17 +946,9 @@ public class ShopUI {
 		
 		initAssets();
 		
-		
 		cardShowingPanel.setLayout(cardLayout);
 		
 		fillInitialPanel();
-		
-		//fillSellerHomePanel();
-		//fillSellerAddNewProdPanel();
-		//fillSellerProductInfoPanel();
-		
-		//fillCostumerHomePanel();
-		
 		
 		cardShowingPanel.add(initialPanel, "CARD_INITIAL_PANEL");
 		
