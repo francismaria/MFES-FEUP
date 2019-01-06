@@ -5,6 +5,7 @@ instance variables
 	
 	-- Shop instance
 	private shop : Shop;
+	private seller1 : Seller := new Seller("Seller1", "pswd1");
 	
 operations
 
@@ -20,6 +21,47 @@ operations
 		assertEqual(shop.getRegisteredProducts(),{|->});
 	);
 	
+	-------------------------------------------------------------
+	-- Tests:
+	--		: the number of users of type Seller that are 
+	--	registered in the shop.
+	-------------------------------------------------------------
+	private getNumberOfSellers: () ==> ()
+	getNumberOfSellers() ==
+	(
+		shop.register("Seller1", "pswd1", <SELLER>);
+		shop.logout();
+		shop.register("Seller2","pswd2", <SELLER>);
+		shop.logout();
+		shop.register("Costumer1","pswd3", <COSTUMER>);
+		shop.logout();
+		assert(shop.getNumberOfSellers() = 2);
+	);
+	
+	-------------------------------------------------------------
+	-- Tests:
+	--		: the number of users of type Seller that are 
+	--	registered in the shop.
+	-------------------------------------------------------------
+	private getNumberOfCostumers: () ==> ()
+	getNumberOfCostumers() ==
+	(
+		assert(shop.getNumberOfCostumers() = 1);
+	);
+	
+	-------------------------------------------------------------
+	-- Tests:
+	--		: the successful logging in and out of a user in the
+	--	shop.
+	-------------------------------------------------------------
+	private userLogging: () ==> ()
+	userLogging() ==
+	(
+		IO`print(shop.getRegisteredUsers());
+		assertEqual(shop.login("Seller1", "pswd1"), true);
+		--shop.logout();
+	);
+	
 	-- Entry point
 	public static main: () ==> ()
 	main() ==
@@ -27,7 +69,9 @@ operations
 		dcl test : ShopTest := new ShopTest();
 		
 		test.createShop();
-		
+		test.getNumberOfSellers();
+		test.getNumberOfCostumers();
+		test.userLogging();
 	);
 	
 functions

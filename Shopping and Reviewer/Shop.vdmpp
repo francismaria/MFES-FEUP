@@ -151,11 +151,13 @@ operations
 			dcl newSeller : Seller := new Seller(newUsername, newPassword);
 			self.addNewUser(newSeller);
 			loggedUser := newSeller;
+			newSeller.logIn();
 		)
 		else (
 			dcl newCostumer : Costumer := new Costumer(newUsername, newPassword);
 			self.addNewUser(newCostumer);
 			loggedUser := newCostumer;
+			newCostumer.logIn();
 		)
 	)
 	pre type = <SELLER> or type = <COSTUMER>;

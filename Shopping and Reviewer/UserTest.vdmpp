@@ -115,6 +115,7 @@ operations
 		review1 := new Review("Great seller", 5, costumer1);
 		review2 := new Review("Mediocre seller", 3, costumer2);
 		seller.addReview(review1); seller.addReview(review2);
+		assertEqual(review1.getText(), "Great seller");
 		assertEqual(seller.getRating(), 4);
 	);
 	
