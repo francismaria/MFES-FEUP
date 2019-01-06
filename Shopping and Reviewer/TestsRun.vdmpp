@@ -12,6 +12,7 @@ operations
 	(
 		UserTest`main();
 		ProductTest`main();
+		ShopTest`main();
 	);
 functions
 -- TODO Define functiones here

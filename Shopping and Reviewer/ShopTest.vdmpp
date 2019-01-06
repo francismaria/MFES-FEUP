@@ -1,0 +1,18 @@
+class ShopTest
+types
+values
+instance variables
+operations
+
+	-- Entry point
+	public static main: () ==> ()
+	main() ==
+	(
+	
+		
+	);
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end ShopTest

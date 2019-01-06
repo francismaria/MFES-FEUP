@@ -24,6 +24,9 @@ operations
 		
 		seller := new Seller("TestSeller", "password1");
 		numUsers := numUsers+1;
+		seller.logIn();
+		seller.setNewPassword("newPassword1");
+		seller.logOut();
 		costumer := new Costumer("TestCostumer", "password1");
 		numUsers := numUsers+1;
 		
@@ -90,6 +93,29 @@ operations
 		
 		assert(seller.getType() = <SELLER>);
 		assert(costumer.getType() = <COSTUMER>);
+	);
+	
+		-------------------------------------------------------------
+	-- Tests:
+	--		: the successful addition of a review to an user
+	--		: the correct rating of a user.
+	-------------------------------------------------------------
+	private getRating: () ==> ()
+	getRating() ==
+	(
+		dcl seller : Seller, costumer1: Costumer,
+			costumer2: Costumer, review1 : Review, review2 : Review;
+		seller := new Seller("TestSeller", "password1");
+		numUsers := numUsers+1;
+		costumer1 := new Costumer("TestCostumer1", "password1");
+		numUsers := numUsers+1;
+		costumer2 := new Costumer("TestCostumer2", "password1");
+		numUsers := numUsers+1;
+		assertEqual(seller.getReviews(), {});
+		review1 := new Review("Great seller", 5, costumer1);
+		review2 := new Review("Mediocre seller", 3, costumer2);
+		seller.addReview(review1); seller.addReview(review2);
+		assertEqual(seller.getRating(), 4);
 	);
 	
 	-------------------------------------------------------------
@@ -175,6 +201,7 @@ operations
 		test.changeUsername();
 		test.correctType();
 		test.checkLogging();
+		test.getRating();
 		--Seller
 		test.sellerTestNewProductOperations();
 		test.sellerTestExistingProductOperations();
