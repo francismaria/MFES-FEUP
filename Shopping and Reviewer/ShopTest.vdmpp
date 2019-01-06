@@ -5,7 +5,6 @@ instance variables
 	
 	-- Shop instance
 	private shop : Shop;
-	private seller1 : Seller := new Seller("Seller1", "pswd1");
 	
 operations
 
@@ -30,6 +29,7 @@ operations
 	getNumberOfSellers() ==
 	(
 		shop.register("Seller1", "pswd1", <SELLER>);
+		assert(shop.login("Seller1", "pswd1") = true);
 		shop.logout();
 		shop.register("Seller2","pswd2", <SELLER>);
 		shop.logout();
@@ -57,9 +57,9 @@ operations
 	private userLogging: () ==> ()
 	userLogging() ==
 	(
-		IO`print(shop.getRegisteredUsers());
 		assertEqual(shop.login("Seller1", "pswd1"), true);
-		--shop.logout();
+		assert(shop.getLoggedUser().getUsername() = "Seller1");
+		shop.logout();
 	);
 	
 	-- Entry point

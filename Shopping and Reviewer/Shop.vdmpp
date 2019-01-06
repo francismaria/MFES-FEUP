@@ -126,7 +126,6 @@ operations
 			then (
 				if user.checkCredentials(inputPassword)
 				then (
-					user.logIn();
 					loggedUser := user;
 					return true
 				)
@@ -151,13 +150,13 @@ operations
 			dcl newSeller : Seller := new Seller(newUsername, newPassword);
 			self.addNewUser(newSeller);
 			loggedUser := newSeller;
-			newSeller.logIn();
+			loggedUser.logIn();
 		)
 		else (
 			dcl newCostumer : Costumer := new Costumer(newUsername, newPassword);
 			self.addNewUser(newCostumer);
 			loggedUser := newCostumer;
-			newCostumer.logIn();
+			loggedUser.logIn();
 		)
 	)
 	pre type = <SELLER> or type = <COSTUMER>;

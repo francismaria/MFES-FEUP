@@ -139,7 +139,6 @@ operations
 	pre loggedIn = true
 	post loggedIn = false;
 	
-	
 		-- This operation updates the average rating of the product
 	private updateRating: () ==> ()
 	updateRating() ==
