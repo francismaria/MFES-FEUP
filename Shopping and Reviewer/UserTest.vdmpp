@@ -10,6 +10,9 @@ instance variables
 operations
 
 	-------------------------------------------------------------
+	--												USER
+	-------------------------------------------------------------
+	-------------------------------------------------------------
 	-- Tests: 
 	--		: the creation of a user of type Seller.
 	--		: the creation of a user of type Costumer.
@@ -90,6 +93,35 @@ operations
 	);
 	
 	-------------------------------------------------------------
+	--												SELLER
+	-------------------------------------------------------------
+	-------------------------------------------------------------
+	-- Tests:
+	--		: the successful addition of a new product to a
+	--	seller's inventory
+	--		: the quantity change of a product
+	--		: the selling of a product
+	--		: the removal of a product
+	-------------------------------------------------------------
+	private sellerTestProductOperations: () ==> ()
+	sellerTestProductOperations() ==
+	(
+		dcl seller : Seller, prod : Product;
+		seller := new Seller("TestSeller", "password1");
+		numUsers := numUsers + 1;
+		prod := new Product("P1", "Great!", 15.99);
+		ProductTest`numProds := ProductTest`numProds + 1;
+		
+		seller.addNewProduct(prod);
+		assertEqual(seller.getProduct(1), prod);
+		seller.getProduct(1).incrementQuantity();
+		assert(seller.sellProduct(1,1) = true);
+		assertEqual(seller.getProduct(1).getQuantity(), 1);
+		seller.removeProduct(1);
+		assert(seller.getAllProducts() = {});
+	);
+	
+	-------------------------------------------------------------
 	-- Tests:
 	--		: the logging in and out of an user.
 	-------------------------------------------------------------
@@ -117,6 +149,8 @@ operations
 		test.changeUsername();
 		test.correctType();
 		test.checkLogging();
+		--Seller
+		test.sellerTestProductOperations();
 	);	
 	
 functions

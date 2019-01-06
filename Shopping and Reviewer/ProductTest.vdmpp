@@ -2,7 +2,7 @@ class ProductTest is subclass of MyTest
 types
 values
 instance variables
-	private numProds : int := 0;
+	public static numProds : int := 0;
 	
 operations
 	-------------------------------------------------------------
