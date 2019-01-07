@@ -1,0 +1,247 @@
+class UserTest is subclass of MyTest
+
+types
+values
+instance variables
+	-- This variable keeps track of the number of users that were created during the tests.
+	-- This way to check if numberOfUsers is correct it is not necessary to have harcoded values.
+	private numUsers : int := 0;
+	
+operations
+
+	-------------------------------------------------------------
+	--												USER
+	-------------------------------------------------------------
+	-------------------------------------------------------------
+	-- Tests: 
+	--		: the creation of a user of type Seller.
+	--		: the creation of a user of type Costumer.
+	-------------------------------------------------------------
+	private createNewUser: () ==> ()
+	createNewUser() ==
+	(
+		dcl seller : Seller, costumer : Costumer;
+		
+		seller := new Seller("TestSeller", "password1");
+		numUsers := numUsers+1;
+		seller.logIn();
+		seller.setNewPassword("newPassword1");
+		seller.logOut();
+		costumer := new Costumer("TestCostumer", "password1");
+		numUsers := numUsers+1;
+		
+		assert(seller.getUsername() = "TestSeller");
+		assert(costumer.getUsername() = "TestCostumer");
+	);
+	
+	-------------------------------------------------------------
+	-- Tests:
+	--		: the correct update of the total number of users.
+	--		: the correct attribuition of the user ID.
+	-------------------------------------------------------------
+	private correctNumberOfUsers: () ==> ()
+	correctNumberOfUsers() ==
+	(
+		dcl seller : Seller, costumer : Costumer, costumer2 : Costumer, seller2 : Seller, seller3 : Seller;
+		assert(User`getNumberOfUsers() = numUsers);
+		
+		seller := new Seller("TestSeller", "password1");
+		numUsers := numUsers+1;
+		costumer := new Costumer("TestCostumer", "password1");
+		numUsers := numUsers+1;
+		seller2 := new Seller("TestSeller2", "password1");
+		numUsers := numUsers+1;
+		seller3 := new Seller("TestSeller3", "password1");
+		numUsers := numUsers+1;
+		costumer2 := new Costumer("TestCostumer2", "password1");
+		numUsers := numUsers+1;
+		
+		assert(User`getNumberOfUsers() = numUsers);
+		assert(costumer2.getUserID() = numUsers);
+	);
+	
+	-------------------------------------------------------------
+	-- Tests:
+	--		: the substitution of a user's username.
+	-------------------------------------------------------------
+	private changeUsername: () ==> ()
+	changeUsername() ==
+	(
+		dcl seller : Seller := new Seller("TestSeller", "password1");
+		numUsers := numUsers+1;
+		
+		if seller.checkCredentials("password1")
+		then (
+			assert(seller.getUsername() = "TestSeller");
+			seller.setNewUsername("NewTestSellerUsername");
+			assert(seller.getUsername() = "NewTestSellerUsername");
+		)
+	);
+	
+	-------------------------------------------------------------
+	-- Tests:
+	--		: the type of the user.
+	-------------------------------------------------------------
+	private correctType: () ==> ()
+	correctType() ==
+	(
+		dcl seller : Seller, costumer : Costumer;
+		seller := new Seller("TestSeller", "password1");
+		numUsers := numUsers+1;
+		costumer := new Costumer("TestCostumer", "password1");
+		numUsers := numUsers+1;
+		
+		assert(seller.getType() = <SELLER>);
+		assert(costumer.getType() = <COSTUMER>);
+	);
+	
+		-------------------------------------------------------------
+	-- Tests:
+	--		: the successful addition of a review to an user
+	--		: the correct rating of a user.
+	-------------------------------------------------------------
+	private getRating: () ==> ()
+	getRating() ==
+	(
+		dcl seller : Seller, costumer1: Costumer,
+			costumer2: Costumer, review1 : Review, review2 : Review;
+		seller := new Seller("TestSeller", "password1");
+		numUsers := numUsers+1;
+		costumer1 := new Costumer("TestCostumer1", "password1");
+		numUsers := numUsers+1;
+		costumer2 := new Costumer("TestCostumer2", "password1");
+		numUsers := numUsers+1;
+		assertEqual(seller.getReviews(), {});
+		review1 := new Review("Great seller", 5, costumer1);
+		review2 := new Review("Mediocre seller", 3, costumer2);
+		seller.addReview(review1); seller.addReview(review2);
+		assertEqual(review1.getText(), "Great seller");
+		assertEqual(seller.getRating(), 4);
+	);
+	
+	-------------------------------------------------------------
+	--												SELLER
+	-------------------------------------------------------------
+	-------------------------------------------------------------
+	-- Tests:
+	--		: the successful addition of a new product to a
+	--	seller's inventory.
+	--		: the quantity change of a product.
+	--		: the selling of a product.
+	--		: the removal of a product.
+	-------------------------------------------------------------
+	private sellerTestNewProductOperations: () ==> ()
+	sellerTestNewProductOperations() ==
+	(
+		dcl seller : Seller, prod : Product;
+		seller := new Seller("TestSeller", "password1");
+		numUsers := numUsers + 1;
+		prod := new Product("P1", "Great!", 15.99);
+		ProductTest`numProds := ProductTest`numProds + 1;
+		
+		seller.addNewProduct(prod);
+		assertEqual(seller.getProduct(1), prod);
+		seller.getProduct(1).incrementQuantity();
+		assert(seller.sellProduct(1,1) = true);
+		assertEqual(seller.getProduct(1).getQuantity(), 1);
+		seller.removeProduct(1);
+		assert(seller.getAllProducts() = {});
+	);
+	
+	-------------------------------------------------------------
+	-- Tests:
+	--		: if the addition of an already exisiting product 
+	--	increments its quantity instead of adding an equal 
+	--	product.
+	--		: if the selling of an existing product with only one 
+	--	instance in stock removes the product from the 
+	-- 	seller's inventory.
+	-------------------------------------------------------------
+	private sellerTestExistingProductOperations: () ==> ()
+	sellerTestExistingProductOperations() ==
+	(
+		dcl seller : Seller, prod : Product;
+		seller := new Seller("TestSeller", "password1");
+		numUsers := numUsers + 1;
+		prod := new Product("P1", "Great!", 15.99);
+		ProductTest`numProds := ProductTest`numProds + 1;
+		
+		seller.addNewProduct(prod);
+		seller.addNewProduct(prod);
+		assertEqual(seller.getProduct(1).getQuantity(), 2);
+		assert(seller.sellProduct(1,1) = true); 
+		assertEqual(seller.sellProduct(1,1), true);
+		assert(seller.getAllProducts() = {});
+	);
+	
+	-------------------------------------------------------------
+	-- Tests:
+	--		: the logging in and out of an user.
+	-------------------------------------------------------------
+	private checkLogging: () ==> ()
+	checkLogging() ==
+	(
+		dcl seller : Seller;
+		seller := new Seller("TestSeller", "password1");
+		numUsers := numUsers + 1;
+		
+		assert(seller.checkCredentials("password1") = true);
+		assert(seller.isLoggedIn() = true);
+		seller.logOut();
+		assert(seller.isLoggedIn() = false);
+	);
+	
+	-- Entry Point
+	public static main : () ==> ()
+	main() ==
+	(
+		dcl test : UserTest := new UserTest();
+	
+		test.createNewUser();
+		test.correctNumberOfUsers();
+		test.changeUsername();
+		test.correctType();
+		test.checkLogging();
+		test.getRating();
+		--Seller
+		test.sellerTestNewProductOperations();
+		test.sellerTestExistingProductOperations();
+	);	
+	
+	----------------------------------------------------------------
+	-- | ENTRY POINTS FOR INVALID INPUTS (TO RUN ONE AT A TIME) | --
+	----------------------------------------------------------------
+	
+		-------------------------------------------------------------
+	-- Error: 
+	--		: violates pre condition where a user has to be given
+	--	a username and a password upon its creation.
+	--	P.S.: one of the statements below can be uncommented to
+	-- 	get the desired result.
+	-------------------------------------------------------------	
+	public static constructUserNoUsermame: () ==> ()
+	constructUserNoUsermame() ==
+	(
+		dcl seller : Seller := new Seller("", "password1");
+		return;
+		--dcl seller : Seller := new Seller("TestUsername", "");
+		--dcl seller : Seller := new Seller("TestUsername", "");
+	);
+	
+	-------------------------------------------------------------
+	-- Error: 
+	--		: violates pre condition where a user has to be logged
+	--	in in order to change its password/username
+	-------------------------------------------------------------	
+	public static unloggedPasswordChange: () ==> ()
+	unloggedPasswordChange() ==
+	(
+		dcl seller : Seller := new Seller("TestSeller", "password1");
+		seller.setNewPassword("newPassword");
+	);
+	
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end UserTest

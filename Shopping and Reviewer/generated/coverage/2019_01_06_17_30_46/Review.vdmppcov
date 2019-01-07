@@ -1,0 +1,55 @@
+class Review
+types
+	public String = seq of char;
+	
+values
+instance variables
+	private text : String;
+	private classification : nat1;
+	private author : User;
+	
+	inv classification > 0 and classification <= 5;
+	
+operations
+	------------------------------------------
+	-- CONSTRUCTOR
+	------------------------------------------
+	
+	public Review: String * nat1 * User ==> Review
+	Review(reviewText, reviewClassification, reviewUser) ==
+	(
+		text := reviewText;
+		classification := reviewClassification;
+		author := reviewUser;
+	)
+	pre reviewClassification > 0 and reviewClassification <= 5;
+	
+	------------------------------------------
+	-- ACCESSOR OPERATIONS 
+	------------------------------------------
+	-- gets the review text
+	pure public getText: () ==> String
+	getText() ==
+	(
+		return text;
+	);
+	
+	-- gets the rating of the review
+	pure public getClassification: () ==> nat1
+	getClassification() ==
+	(
+		return classification;
+	);
+	
+	-- gets the user who wrote the review
+	pure public getAuthor: () ==> User
+	getAuthor() ==
+	(
+		return author;
+	);
+	
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Review

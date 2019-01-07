@@ -1,0 +1,30 @@
+class Costumer is subclass of User
+
+types
+
+values
+
+instance variables
+	
+operations
+	------------------------------------------
+	-- CONSTRUCTOR
+	------------------------------------------
+	public Costumer : String * String ==> Costumer
+	Costumer(usernameExt, passwordExt) == 
+	(
+		User`User(usernameExt, passwordExt);
+	);
+	
+	-- gets the type of the user
+	public getType: () ==> UserType
+	getType() ==
+	(
+		return <COSTUMER>;
+	);
+	
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Costumer

@@ -1,0 +1,170 @@
+class Product
+
+types
+	public String = seq of char;
+	public Float = real;
+	
+values
+
+instance variables
+
+	private ID : nat1;
+	private name : String;
+	private description : String;
+	private price : Float;
+	private quantity : int;
+	private rating : Float := 0;
+	private reviews : set of Review := {};
+	
+	private static numberOfProducts : int := 0;
+	
+	inv ID <= numberOfProducts and ID > 0;
+	inv rating >= 0 and rating <= 5;
+	inv price >= 0.00;
+	
+operations
+	------------------------------------------
+	-- CONSTRUCTOR
+	------------------------------------------
+	
+	public Product: String * String * Float ==> Product
+	Product(newName, newDescription, newPrice) ==
+	(
+		name := newName;
+		description := newDescription;
+		price := newPrice;
+		quantity := 1;
+		numberOfProducts := numberOfProducts + 1;
+		ID := numberOfProducts;
+	)
+	pre newName <> "" and newDescription <> "" and newPrice >= 0;
+
+	------------------------------------------
+	-- ACCESSOR OPERATIONS 
+	------------------------------------------
+	
+	public getID: () ==> nat1
+	getID() ==
+	(
+		return ID;
+	);
+	
+	public getName: () ==> String
+	getName() ==
+	(
+		return name;
+	);
+	
+	public getDescription: () ==> String
+	getDescription() == 
+	(
+		return description;
+	);
+	
+	public getPrice: () ==> Float
+	getPrice() ==
+	(
+		return price;
+	);
+	
+	public getQuantity: () ==> int
+	getQuantity() == 
+	(
+		return quantity;
+	);
+	
+	public getRating: () ==> Float
+	getRating() ==
+	(
+		return rating;
+	);
+	
+	public getReviews: () ==> set of Review
+	getReviews() ==
+	(
+		return reviews;
+	);
+	
+	public static getNumberOfProducts: () ==> int
+	getNumberOfProducts() ==
+	(
+		return numberOfProducts;
+	);
+	
+	------------------------------------------
+	-- MODIFIER OPERATIONS
+	------------------------------------------
+	
+	-- adds a review to the products
+	public addReview: Review ==> ()
+	addReview(userReview) ==
+	(
+		reviews := reviews union {userReview};
+		updateRating();
+	);
+	
+	-- changes product price
+	public changePrice: Float ==> ()
+	changePrice(newPrice) ==
+	(
+		price := newPrice;
+	)
+	pre price <> newPrice;
+
+	-- increments the user quantity
+	public incrementQuantity: () ==> ()
+	incrementQuantity() ==
+	(
+		quantity := quantity + 1;
+	)
+	post quantity > 0;
+	
+	-- decreases product quantity
+	public decrementQuantity: nat1 ==> ()
+	decrementQuantity(subtract) ==
+	(
+		quantity := quantity - subtract;
+	)
+	pre quantity > 0 and subtract <= quantity
+	post quantity >= 0;
+	
+	-- This operation updates the average rating of the product
+	private updateRating: () ==> ()
+	updateRating() ==
+	(
+		dcl allRatingsSum : nat := 0, numRatings : nat := 0;
+		for all r in set reviews do
+		(
+			allRatingsSum := allRatingsSum + r.getClassification();
+			numRatings := numRatings + 1;
+		);
+		rating := calculateRating(numRatings, allRatingsSum);
+	);
+	
+	------------------------------------------
+	-- COMPARISION OPERATIONS
+	------------------------------------------
+	-- checks if two products are the same
+	public isEqual: Product ==> bool
+	isEqual(newProduct) ==
+	(
+		return name = newProduct.getName() 
+			and description = newProduct.getDescription()
+			and price = newProduct.getPrice();
+	);
+	
+functions
+
+	--this function calculates the average product rating
+	private calculateRating: nat * nat -> Float
+	calculateRating(numReviews, reviewsRatings) ==
+	(
+		if numReviews = 0 then 0
+		else 
+			reviewsRatings / numReviews
+	);
+	
+traces
+-- TODO Define Combinatorial Test Traces here
+
+end Product
