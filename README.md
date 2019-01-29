@@ -13,5 +13,5 @@ As stated above the model was created using the Overture tool. However, it was a
 
 ## Gains
 
-At the end of the work, I have acquired the ability of formally modeling software systems in VDM++, and of demonstrating the consistency of the model.
+At the end of the work, I have acquired the ability of formally modeling software systems in VDM++, and of demonstrating the consistency of a model.
 
